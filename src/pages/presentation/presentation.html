@@ -1,0 +1,52 @@
+<!--
+  Generated template for the PresentationPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-content>
+
+    <!--<h1 id="presentation_welcome_message" text-center text-wrap>-->
+    <!--Welcome to Muser-->
+    <!--</h1>-->
+
+
+    <video autoplay loop
+           src="https://dollarfootage.com/wp-content/uploads/2016/06/Paradise-pool-stock-footage-and-palm-trees-silhouette-df-preview.mp4">
+    </video>
+
+    <ion-slides autoplay="4000" pager loop>
+        <ion-slide>
+            <h4>Welcome</h4>
+            <p>Let us take care of you for the weekend</p>
+        </ion-slide>
+        <ion-slide>
+            <h4>Escape</h4>
+            <p>Let us take care of you for the weekend</p>
+        </ion-slide>
+        <ion-slide>
+            <h4>Luxury</h4>
+            <p>Let us take care of you for the weekend</p>
+        </ion-slide>
+    </ion-slides>
+
+
+</ion-content>
+
+<ion-footer>
+    <ion-row text-center="">
+        <ion-col offset-1 col-4>
+            <button ion-button round large full class="presentation_footer_button" (click)="goToLoginPage()">
+                Login
+            </button>
+        </ion-col>
+
+        <ion-col offset-2 col-4>
+            <button ion-button round large full class="presentation_footer_button" (click)="goToRegisterPage()">
+                Register
+            </button>
+        </ion-col>
+        <ion-col offset-1></ion-col>
+    </ion-row>
+</ion-footer>

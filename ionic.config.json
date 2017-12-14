@@ -1,8 +1,14 @@
 {
-  "name": "MuserFrontEnd",
-  "app_id": "",
-  "type": "ionic-angular",
-  "integrations": {
-    "cordova": {}
-  }
+    "name": "MuserFrontEnd",
+    "app_id": "",
+    "type": "ionic-angular",
+    "integrations": {
+        "cordova": {}
+    },
+    "proxies": [
+        {
+            "path": "/dev",
+            "proxyUrl": "https://1jxyzst870.execute-api.eu-west-1.amazonaws.com/dev"
+        }
+    ]
 }

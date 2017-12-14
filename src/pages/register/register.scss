@@ -1,0 +1,44 @@
+page-register {
+
+    #register_title > div {
+        font-size: 2.2rem;
+        text-align: left;
+    }
+
+    .bg-style {
+        background: #222
+    }
+
+    .register_item {
+        background: #222 !important;
+    }
+
+    .register_label {
+        color: white !important;
+        font-size: 1.5rem;
+    }
+
+    .register_input {
+        color: white;
+        font-size: 2.0rem;
+    }
+
+    .logo-row {
+        padding-top: 50px;
+        padding-bottom: 20px;
+    }
+
+    .register-box {
+        padding: 20px 20px 0px 20px;
+        margin-top: 30px;
+    }
+
+    #submit-button {
+        background: #6200ea;
+    }
+
+    #login_muser_logo {
+        max-width: none;
+    }
+}
+
