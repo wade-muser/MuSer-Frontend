@@ -1,67 +1,85 @@
 <ion-header>
-    <ion-navbar>
-        <button menuToggle>
+    <ion-navbar color="dark">
+        <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>MuSer</ion-title>
+        <ion-title>
+            MuSer
+        </ion-title>
     </ion-navbar>
 </ion-header>
 
 
-<ion-content overflow-scroll="false" padding>
-    <ion-grid>
-        <ion-row>
-            <ion-col width-100>
-                <ion-item>
-                    <h2>Made for you</h2>
-                </ion-item>
-            </ion-col>
-        </ion-row>
+<ion-content overflow="auto" class="bg-style">
+
+    <div id="header-box">
+        <ion-grid>
+            <ion-row col-12>
+                <div id="made_for_you" col-12 (click)="goToMadeForYou()">
+                    <h3>
+                        Made for you
+                    </h3>
+                </div>
+            </ion-row>
+        </ion-grid>
+    </div>
+
+    <div id="browse-category">
+        <ion-grid>
+            <ion-row col-12>
+                <h3>
+                    Browse >
+                </h3>
+            </ion-row>
+
+            <ion-row>
+                <ion-col>
+                    <ion-scroll scrollX="true" id="browse_scroll">
+                        <button ion-button large class="browse-category-buttons" *ngFor="let genre of genres"
+                                (click)="goToGenrePage(genre)">
+                            {{genre.name}}
+                        </button>
+
+                        <button ion-button large class="browse-category-buttons" *ngFor="let chart of charts"
+                                (click)="goToChartPage(chart)">
+                            {{chart.name}}
+                        </button>
+
+                    </ion-scroll>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
 
 
-        <ion-row>
-            <ion-col width-100>
-                <label>Browse > </label>
-            </ion-col>
-        </ion-row>
+    <div id="browse-popular">
+        <ion-grid>
+            <ion-row col-12>
+                <h3>
+                    Popular >
+                </h3>
+            </ion-row>
 
-        <ion-row>
-            <ion-col>
-                <ion-scroll scrollX="true">
-                    <button ion-button large>
-                        Pop
-                    </button>
-                    <button ion-button large>
-                        R'N'B
-                    </button>
-                    <button ion-button large>
-                        Popular
-                    </button>
-                    <button ion-button large>
-                        Party
-                    </button>
-                    <button ion-button large>
-                        Rock
-                    </button>
-                    <button ion-button large>
-                        Rap
-                    </button>
-                    <button ion-button large>
-                        New Release
-                    </button>
-                    <button ion-button large>
-                        Charts
-                    </button>
-                </ion-scroll>
-            </ion-col>
-        </ion-row>
+            <ion-row col-12>
+                <ion-col>
+                    <ion-scroll scrollX="true" id="popularScroll">
+                        <div>
+                            <ion-card class="popular-cards" *ngFor="let popularSong of popularSongs">
 
-        <ion-row>
-            <ion-col width-100>
-                <label>Popular > </label>
-            </ion-col>
-        </ion-row>
+                                <img class="cardImage" [src]="popularSong.imageUrl" (click)="goToSongPage(popularSong)"
+                                     onerror="this.src='../../assets/imgs/album_cover_alternative.jpg'"/>
+                                <ion-card-content class="popular-card-content">
+                                    <p class="popular-song-name">
+                                        {{popularSong.name}}
+                                    </p>
 
-    </ion-grid>
+                                </ion-card-content>
+                            </ion-card>
+                        </div>
+                    </ion-scroll>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
 
 </ion-content>

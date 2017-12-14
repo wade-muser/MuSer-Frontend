@@ -11,28 +11,29 @@ import {HomePage} from "../pages/home/home";
 })
 export class MyApp {
 
-    private LOCALE_STORAGE_TOKEN_KEY = "token";
-    private HTTP_STATUS_CODE_OK = 200;
+    @ViewChild(Nav) nav: Nav;
     rootPage: any = PresentationPage;
 
 
-    @ViewChild(Nav) nav: Nav;
+    private LOCALE_STORAGE_TOKEN_KEY = "token";
+    private HTTP_STATUS_CODE_OK = 200;
 
     constructor(public platform: Platform,
                 public statusBar: StatusBar,
                 public splashScreen: SplashScreen,
                 public authorizationProvider: AuthorizationProvider) {
 
+        this.initializeApp();
+    }
+
+    initializeApp() {
         const token = localStorage.getItem(this.LOCALE_STORAGE_TOKEN_KEY);
 
-
-        platform.ready().then(() => {
-            // Okay, so the platform is ready and our plugins are available.
-            // Here you can do any higher level native things you might need.
+        this.platform.ready().then(() => {
 
             if (token != null) {
                 console.log("Token found")
-                authorizationProvider.check(token)
+                this.authorizationProvider.check(token)
                     .subscribe(response => {
                         console.log(response);
                         if (response.status !== this.HTTP_STATUS_CODE_OK) {
@@ -46,9 +47,11 @@ export class MyApp {
                 console.log("No token found");
             }
 
+            // Okay, so the platform is ready and our plugins are available.
+            // Here you can do any higher level native things you might need.
 
-            statusBar.styleDefault();
-            splashScreen.hide();
+            this.statusBar.styleDefault();
+            this.splashScreen.hide();
         });
     }
 

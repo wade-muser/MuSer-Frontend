@@ -4,9 +4,10 @@
             <ion-title>Menu</ion-title>
         </ion-toolbar>
     </ion-header>
+
     <ion-content>
         <ion-list>
-            <button menuClose ion-item (click)="logout()">
+            <button ion-item menuClose (click)="logout()">
                 Logout
             </button>
         </ion-list>
@@ -14,4 +15,4 @@
 </ion-menu>
 
 
-<ion-nav #content [root]="rootPage"></ion-nav>`
+<ion-nav #content [root]="rootPage" swipeBackEnabled="false"></ion-nav>

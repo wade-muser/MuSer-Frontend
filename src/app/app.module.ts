@@ -3,8 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 import {MyApp} from './app.component';
 
-import {AboutPage} from '../pages/about/about';
-import {ContactPage} from '../pages/contact/contact';
+import {LibraryPage} from '../pages/library/library';
 import {HomePage} from '../pages/home/home';
 import {TabsPage} from '../pages/tabs/tabs';
 
@@ -24,8 +23,7 @@ import {AuthorizationProvider} from '../providers/authorization/authorization';
 @NgModule({
     declarations: [
         MyApp,
-        AboutPage,
-        ContactPage,
+        LibraryPage,
         HomePage,
         TabsPage,
         DiscoverPage,
@@ -42,8 +40,7 @@ import {AuthorizationProvider} from '../providers/authorization/authorization';
     bootstrap: [IonicApp],
     entryComponents: [
         MyApp,
-        AboutPage,
-        ContactPage,
+        LibraryPage,
         HomePage,
         TabsPage,
         DiscoverPage,

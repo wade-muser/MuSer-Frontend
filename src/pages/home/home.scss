@@ -1,25 +1,93 @@
 page-home {
 
+    ion-title {
+        text-align: center;
+        margin-right: 4.5rem;
+    }
+    .bg-style {
+        background: color($colors, dark, base)
+    }
+
+    .login_item {
+        background: color($colors, dark, base) !important;
+    }
+
+    #header-box {
+        border-top: 1px solid white;
+        border-bottom: 1px solid white;
+        margin-top: 1rem;
+    }
+
+    #made_for_you {
+        color: white;
+    }
+
+    #made_for_you > h3 {
+        text-align: center;
+    }
+
+    #browse-category, #browse-popular {
+        color: white;
+    }
+
+    #browse-popular {
+        margin-top: -20px;
+    }
+
+    .browse-category-buttons {
+        background: color($colors, purple);
+        font-weight: bold;
+        min-width: 40%;
+        margin-right: 2rem;
+    }
+
+    #browse_scroll {
+        white-space: nowrap;
+        height: 100px;
+    }
+
+    #popularScroll {
+        white-space: nowrap;
+        height: 25rem;
+
+        .scroll-content {
+            padding: 0px !important;
+        }
+    }
+
+    ion-img {
+        object-fit: scale-down;
+    }
+
+    .popular-cards {
+        display: inline-block;
+        width: 70%;
+        border-radius: 0px;
+        margin-left: 20px;
+        //box-shadow: none;
+        //-webkit-box-shadow: none;
+
+    }
+
+    .cardImage {
+        width: 100%;
+        height: 150px;
+        background: color($colors, dark);;
+    }
+
+    .popular-card-content {
+        background: color($colors, dark);
+        text-align: center;
+        word-wrap: break-word;
+    }
+
+    .popular-song-name {
+        color: white;
+        font-size: 1.7rem;
+        word-wrap: break-word;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
 }
 
-ion-title{
-    text-align: center;
-}
-h2{
-    text-align: center;
-}
-.box {
-    width:100%;
-    display:inline-block;
-    border:2px solid black;
-    padding: 10px;
-    margin: 5px;
-}
-
-
-
-ion-scroll {
-    white-space: nowrap;
-    height: 100px;
-}
- 
