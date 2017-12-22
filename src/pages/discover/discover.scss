@@ -1,3 +1,49 @@
 page-discover {
 
+    ion-title {
+        text-align: center;
+        margin-right: 4.5rem;
+    }
+
+    .bg-style {
+        background: color($colors, dark, base)
+    }
+
+    .search-chip {
+        background-color: color($colors, purple);
+        color: white;
+        font-weight: bold;
+        font-size: 1.5rem;
+    }
+
+    .chip-button {
+        background-color: color($colors, purple);
+        font-size: 1.5rem
+    }
+
+    #search-bar {
+        border-bottom: 1px solid white;
+    }
+
+    .result-card {
+        background-color: color($colors, dark);
+        margin-bottom: 3rem;
+    }
+
+    .result-card-content {
+        background-color: color($colors, dark);
+        -webkit-box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0);
+        -moz-box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0);
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+        text-align: center;
+    }
+    .result-name {
+        color: white;
+        font-weight: bold;
+        font-size: 1.7rem;
+        word-wrap: break-word;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
 }

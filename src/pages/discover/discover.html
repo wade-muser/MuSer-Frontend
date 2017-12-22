@@ -5,32 +5,75 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-    <ion-navbar>
+    <ion-navbar color="dark">
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Discover</ion-title>
+        <ion-title>
+            Discover
+        </ion-title>
     </ion-navbar>
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="bg-style">
 
-    <ion-grid>
-        <ion-row>
-            <ion-col col-11>
-                <ion-searchbar
-                    [(ngModel)]="searchKey"
-                    [showCancelButton]="shouldShowCancel"
-                    (ionInput)="onInput($event)"
-                    (ionCancel)="onCancel($event)">
-                </ion-searchbar>
-            </ion-col>
-            <ion-col col-1>
-                <button ion-button icon-end>
-                    <ion-icon name="options"></ion-icon>
-                </button>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
+    <div id="search-bar">
+
+        <ion-searchbar [disabled]="!filterIsSelected"
+                       [(ngModel)]="searchValue"
+                       [showCancelButton]="true"
+                       (ionInput)="onInput($event)"
+                       (ionCancel)="onCancel($event)">
+        </ion-searchbar>
+
+        <ion-grid>
+            <ion-row col-12>
+
+                <ion-col>
+                    <ion-chip class="search-chip" (click)="showSelectSearchFilterDialog()" *ngIf="!filterIsSelected">
+                        <ion-label>
+                            Select Filter
+                        </ion-label>
+                        <button class="chip-button" ion-button clear color="light">
+                            <ion-icon ios="ios-add" md="md-add"></ion-icon>
+                        </button>
+                    </ion-chip>
+
+                    <ion-chip class="search-chip" #filterChip *ngIf="selectedFilter.length>0">
+                        <ion-label>
+                            {{selectedFilter}}
+                        </ion-label>
+                        <button class="chip-button" ion-button clear color="light"
+                                (click)="removeFilter(filterChip)">
+                            <ion-icon name="close-circle"></ion-icon>
+                        </button>
+                    </ion-chip>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+
+    <div id="search-result-artists" *ngIf="filterIsSelected">
+        <ion-grid>
+            <ion-row col-12>
+                <ion-col col-2>
+                </ion-col>
+                <ion-col col-8>
+                    <ion-card *ngFor="let searchResult of searchResults" class="result-card">
+                        <img class="card-image" [src]="searchResult.imageUrl" (click)="goToResultPage(searchResult)"
+                             onerror="this.src='../../assets/imgs/album_cover_alternative.jpg'">
+                        <ion-card-content class="result-card-content">
+                            <p class="result-name">
+                                {{searchResult.name}}
+                            </p>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+                <ion-col col-2>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+
 </ion-content>

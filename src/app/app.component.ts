@@ -4,7 +4,7 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {PresentationPage} from "../pages/presentation/presentation";
 import {AuthorizationProvider} from "../providers/authorization/authorization";
-import {HomePage} from "../pages/home/home";
+import {TabsPage} from "../pages/tabs/tabs";
 
 @Component({
     templateUrl: 'app.html'
@@ -40,7 +40,7 @@ export class MyApp {
                             localStorage.removeItem(this.LOCALE_STORAGE_TOKEN_KEY);
                             this.rootPage = PresentationPage;
                         } else {
-                            this.rootPage = HomePage;
+                            this.rootPage = TabsPage;
                         }
                     });
             } else {

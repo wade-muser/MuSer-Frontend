@@ -16,4 +16,11 @@
             @ionicframework
         </ion-item>
     </ion-list>
+
+    <ion-chip #chip1>
+        <ion-label>Default</ion-label>
+        <button ion-button clear color="light" (click)="delete(chip1)">
+            <ion-icon name="close-circle"></ion-icon>
+        </button>
+    </ion-chip>
 </ion-content>

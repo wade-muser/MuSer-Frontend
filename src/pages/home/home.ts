@@ -28,7 +28,8 @@ export class HomePage {
         this.popularSongs.push(new Song(
             "1",
             "PostMalone Rockstar",
-            "https://i1.sndcdn.com/artworks-oJdxXcIn59Yo-0-t500x500.jpg"));
+            "https://i1.sndcdn.com/artworks-oJdxXcIn59Yo-0-t500x500.jpg"
+        ));
         this.popularSongs.push(new Song(
             "2",
             "Dua Lipa New Rules",

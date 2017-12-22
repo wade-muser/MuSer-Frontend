@@ -66,7 +66,7 @@
                         <div>
                             <ion-card class="popular-cards" *ngFor="let popularSong of popularSongs">
 
-                                <img class="cardImage" [src]="popularSong.imageUrl" (click)="goToSongPage(popularSong)"
+                                <img class="card-image" [src]="popularSong.imageUrl" (click)="goToSongPage(popularSong)"
                                      onerror="this.src='../../assets/imgs/album_cover_alternative.jpg'"/>
                                 <ion-card-content class="popular-card-content">
                                     <p class="popular-song-name">

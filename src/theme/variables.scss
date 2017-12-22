@@ -33,11 +33,26 @@ $colors: (
     danger: #f53d3d,
     light: #f4f4f4,
     dark: #222,
-    purple:#6200ea
+    purple:#6200ea,
+    grey:#057471,
 );
 
-$text-input-highlight-color-valid: #6200ea;
+$text-input-highlight-color-valid: color($colors, purple);
 $text-input-highlight-color-invalid: #ff0003;
+
+$tabs-background: #210404;
+$tabs-border-color:white;
+
+$tabs-md-tab-text-color-active: white;
+$tabs-md-tab-icon-color-active: white;
+$tabs-md-tab-text-color: color($colors, grey);
+$tabs-md-tab-icon-color: color($colors, grey);
+
+//IOS Tabs Customization
+$tabs-ios-tab-text-color-active: white;
+$tabs-ios-tab-icon-color-active: white;
+$tabs-ios-tab-text-color: color($colors, grey);
+$tabs-ios-tab-icon-color: color($colors, grey);
 
 // App iOS Variables
 // --------------------------------------------------
