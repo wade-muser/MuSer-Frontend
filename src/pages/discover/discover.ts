@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {Artist} from "../../models/Artist";
+import {ArtistPage} from "../artist/artist";
 
 /**
  * Generated class for the DiscoverPage page.
@@ -15,26 +16,29 @@ import {Artist} from "../../models/Artist";
     templateUrl: 'discover.html',
 })
 export class DiscoverPage {
+    searchResults: Array<Artist>;
+
     searchValue;
     filterIsSelected = false;
     selectedFilter: string;
 
-    searchResults: Array<Artist>;
-
-
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
-                private alertContoller: AlertController) {
+                private alertController: AlertController) {
+
         this.selectedFilter = "";
-        this.searchResults = [];
-        this.searchResults.push(new Artist(
-            "The Weeknd",
-            "https://i1.sndcdn.com/artworks-oJdxXcIn59Yo-0-t500x500.jpg"
-        ));
-        this.searchResults.push(new Artist(
-            "Dua Lipa",
-            "https://www.iomoio.com/covers/src/19/436719.jpg"
-        ));
+        this.searchResults = [
+            new Artist(
+                "",
+                "The Weeknd",
+                "https://i1.sndcdn.com/artworks-oJdxXcIn59Yo-0-t500x500.jpg"
+            ),
+            new Artist(
+                "",
+                "Dua Lipa",
+                "https://www.iomoio.com/covers/src/19/436719.jpg"
+            )
+        ];
     }
 
     ionViewDidLoad() {
@@ -42,7 +46,7 @@ export class DiscoverPage {
     }
 
     showSelectSearchFilterDialog() {
-        let alert = this.alertContoller.create();
+        let alert = this.alertController.create();
         alert.setTitle("Search Filter");
         alert.addInput({
             type: "radio",
@@ -92,6 +96,8 @@ export class DiscoverPage {
 
     goToResultPage(searchResult: Artist) {
         console.log(searchResult);
+        console.log("Navigate to ArtistPage")
+        this.navCtrl.push(ArtistPage, {"artist": searchResult});
     }
 
 }

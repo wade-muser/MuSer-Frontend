@@ -18,6 +18,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {LoginProvider} from '../providers/login/login';
 import {IonicStorageModule} from "@ionic/storage";
 import {AuthorizationProvider} from '../providers/authorization/authorization';
+import {ArtistPage} from "../pages/artist/artist";
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import {AuthorizationProvider} from '../providers/authorization/authorization';
         LoginPage,
         RegisterPage,
         PresentationPage,
+        ArtistPage,
     ],
     imports: [
         BrowserModule,
@@ -47,6 +49,7 @@ import {AuthorizationProvider} from '../providers/authorization/authorization';
         LoginPage,
         RegisterPage,
         PresentationPage,
+        ArtistPage,
     ],
     providers: [
         StatusBar,

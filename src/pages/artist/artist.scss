@@ -1,0 +1,110 @@
+page-artist {
+
+    .bg-style {
+        background: color($colors, dark, base)
+    }
+    #artist-avatar-card {
+        border-radius: 0px;
+        webkit-box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.14), 0 0px 0px 0px rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.12);
+        box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.14), 0 0px 0px 0px rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.12);
+
+    }
+
+    #artist-avatar-item {
+        background-color: color($colors, dark);
+
+    }
+
+    #artist-avatar-picture {
+        margin: auto;
+        width: 20rem;
+        height: 20rem;
+    }
+
+    #popular-title {
+        text-align: center;
+        color: white;
+        margin-bottom: 3rem;
+    }
+
+    .artist-popular-songs-item, .artist-event-item {
+        background-color: color($colors, dark);
+    }
+
+    .artist-popular-songs-name, .event-title {
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        word-wrap: break-word;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+    }
+
+    #related-artists-label, #albums-label {
+        text-align: center;
+        color: white;
+        margin-bottom: 2rem;
+    }
+
+    #related-artists-scroll, #albums-scroll {
+        white-space: nowrap;
+        height: 25rem;
+
+        .scroll-content {
+            padding: 0px !important;
+        }
+    }
+
+    .related-artist-card, .album-card {
+        display: inline-block;
+        width: 60%;
+        border-radius: 0px;
+        margin-left: 0px;
+        webkit-box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.14), 0 0px 0px 0px rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.12);
+        box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.14), 0 0px 0px 0px rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.12);
+    }
+    .related-artist-card-item, .popular-album-card-item {
+        background: color($colors, dark);
+
+    }
+
+    .related-artist-card-avatar-image, .popular-album-card-avatar-image {
+        margin: auto;
+        width: 100% !important;
+        height: 15rem !important;
+    }
+
+    .related-artist-card-content, .popular-album-card-content {
+        background: color($colors, dark);
+        text-align: center;
+        word-wrap: break-word;
+    }
+
+    .related-artist-card-content-name, .popular-album-card-content-name {
+        color: white;
+        font-size: 1.9rem;
+        word-wrap: break-word;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .related-info-row {
+        margin-top: -20px;
+    }
+
+    #event-label {
+        text-align: center;
+        color: white;
+        margin-bottom: 3rem;
+    }
+
+    #event-list {
+        margin-top: 20px;
+    }
+
+    .event-info {
+        color: white;
+    }
+
+}

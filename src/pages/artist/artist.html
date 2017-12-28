@@ -1,0 +1,139 @@
+<!--
+  Generated template for the ArtistPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar color="dark">
+        <ion-title>{{artist.name}}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content no-padding class="bg-style">
+
+    <ion-card id="artist-avatar-card">
+        <ion-item id="artist-avatar-item">
+            <ion-avatar>
+                <img id="artist-avatar-picture" [src]="artist.imageUrl"/>
+            </ion-avatar>
+        </ion-item>
+    </ion-card>
+
+    <h2 id="popular-title">
+        Popular
+    </h2>
+
+    <ion-list no-lines>
+        <ion-item class="artist-popular-songs-item" *ngFor="let popularSong of popularSongs"
+                  (click)="goToSongPage(popularSong)">
+            <ion-thumbnail item-start>
+                <img [src]="popularSong.imageUrl"/>
+            </ion-thumbnail>
+            <h2 class="artist-popular-songs-name">
+                {{popularSong.name}}
+            </h2>
+        </ion-item>
+    </ion-list>
+
+
+    <ion-grid>
+
+        <ion-row col-12>
+            <ion-col>
+                <h2 id="related-artists-label">
+                    Related Artists
+                </h2>
+            </ion-col>
+
+        </ion-row>
+
+        <ion-row col-12 class="related-info-row">
+            <ion-col>
+                <ion-scroll scrollX="true" id="related-artists-scroll">
+                    <div>
+                        <ion-card class="related-artist-card" *ngFor="let relatedArtist of relatedArtists">
+                            <ion-item class="related-artist-card-item">
+                                <ion-avatar>
+                                    <img class="related-artist-card-avatar-image" [src]="relatedArtist.imageUrl"
+                                         (click)="goToArtistPage(relatedArtist)"
+                                         onerror="this.src='../../assets/imgs/album_cover_alternative.jpg'"/>
+                                </ion-avatar>
+
+                                <ion-card-content class="related-artist-card-content">
+                                    <p class="related-artist-card-content-name">
+                                        {{relatedArtist.name}}
+                                    </p>
+                                </ion-card-content>
+                            </ion-item>
+
+                        </ion-card>
+                    </div>
+                </ion-scroll>
+            </ion-col>
+        </ion-row>
+
+        <ion-row col-12>
+            <ion-col>
+                <h2 id="albums-label">
+                    Albums
+                </h2>
+            </ion-col>
+        </ion-row>
+
+        <ion-row col-12 class="related-info-row">
+            <ion-col>
+                <ion-scroll scrollX="true" id="albums-scroll">
+                    <div>
+                        <ion-card class="album-card" *ngFor="let popularAlbum of popularAlbums">
+                            <ion-item class="popular-album-card-item">
+                                <ion-avatar>
+                                    <img class="popular-album-card-avatar-image"
+                                         [src]="popularAlbum.imageUrl" (click)="goToAlbumPage(popularAlbum)"
+                                         onerror="this.src='../../assets/imgs/album_cover_alternative.jpg'">
+                                </ion-avatar>
+
+                                <ion-card-content class="popular-album-card-content">
+                                    <p class="popular-album-card-content-name">
+                                        {{popularAlbum.name}}
+                                    </p>
+
+                                </ion-card-content>
+
+                            </ion-item>
+
+                        </ion-card>
+                    </div>
+                </ion-scroll>
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+
+    <h2 id="event-label">
+        Events
+    </h2>
+
+
+    <ion-list no-lines id="event-list">
+        <ion-item class="artist-event-item" *ngFor="let event of events" (click)="goToEventPage(event)">
+            <ion-thumbnail item-start>
+                <img [src]="event.imageUrl">
+            </ion-thumbnail>
+            <h2 class="event-title">
+                {{event.title}}
+            </h2>
+            <p class="event-info">
+                {{formatEventDate(event.startDate)}}
+            </p>
+
+            <p class="event-info">
+                {{event.city}}
+            </p>
+        </ion-item>
+    </ion-list>
+
+</ion-content>
