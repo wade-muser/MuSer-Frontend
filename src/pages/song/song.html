@@ -6,13 +6,58 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>song</ion-title>
-  </ion-navbar>
+    <ion-navbar color="dark">
+        <ion-title>{{song.name}}</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content no-padding class="bg-style">
+
+    <ion-card id="song-avatar-card">
+        <ion-item id="song-avatar-card-item">
+            <ion-avatar>
+                <img id="song-avatar-picture" [src]="song.imageUrl">
+            </ion-avatar>
+            <ion-card-content id="song-card-content">
+                <p id="song-card-content-artists-name">
+                    {{song.getArtist()}}
+                </p>
+            </ion-card-content>
+        </ion-item>
+    </ion-card>
+
+    <ion-list no-lines>
+        <ion-item class="listen-option-item" (click)="listenOnSpotify()">
+            <h2 class="listen-option-label">
+                Listen on
+            </h2>
+            <ion-avatar item-right class="listen-option-avatar">
+                <img src="../../assets/icon/Spotify.ico" class="listen-option-image">
+            </ion-avatar>
+        </ion-item>
+
+        <ion-item class="listen-option-item" (click)="watchOnYoutube()">
+            <h2 class="listen-option-label">
+                Watch on
+            </h2>
+            <ion-avatar item-right class="listen-option-avatar">
+                <img src="../../assets/icon/YouTube.ico" class="listen-option-image">
+            </ion-avatar>
+        </ion-item>
+
+        <ion-item id="listen-add-to-playlist-item" class="listen-option-item" (click)="showPlaylistsOptions()">
+            <ion-avatar item-left id="listen-add-to-playlist-avatar">
+                <img src="../../assets/icon/Add.ico" id="listen-add-to-playlist-image">
+            </ion-avatar>
+
+            <h2 id="listen-add-to-playlist-label">
+                Add to Playlist
+            </h2>
+        </ion-item>
+
+    </ion-list>
+
 
 </ion-content>

@@ -22,15 +22,6 @@ page-album {
         height: 20rem;
     }
 
-    #album-content-label {
-        color: white;
-        margin-bottom: 14px;
-        margin-top: -14px;
-        padding-left: 14px;
-        padding-bottom: 5px;
-        border-bottom: 1px solid white;
-    }
-
     #album-card-content-artist-name {
         color: white;
         font-size: 1.9rem;
@@ -38,6 +29,15 @@ page-album {
         overflow: hidden;
         text-overflow: ellipsis;
         text-align: center;
+    }
+
+    #album-content-label {
+        color: white;
+        margin-bottom: 14px;
+        margin-top: -14px;
+        padding-left: 14px;
+        padding-bottom: 5px;
+        border-bottom: 1px solid white;
     }
 
     .album-song-item {

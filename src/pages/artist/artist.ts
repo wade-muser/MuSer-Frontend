@@ -34,7 +34,7 @@ export class ArtistPage {
 
         this.artist = navParams.get(this.NAV_PARAM_ARTIST_KEY);
         this.artistService
-            .getPopularAlbums(this.artist.id)
+            .getPopularSongs(this.artist.id)
             .subscribe(songs => {
                 this.popularSongs = songs;
             });

@@ -23,6 +23,7 @@ import {ArtistProvider} from '../providers/artist/artist';
 import {AlbumProvider} from '../providers/album/album';
 import {AlbumPage} from "../pages/album/album";
 import {SongPage} from "../pages/song/song";
+import {InAppBrowser} from "@ionic-native/in-app-browser";
 
 
 @NgModule({
@@ -68,6 +69,7 @@ import {SongPage} from "../pages/song/song";
         AuthorizationProvider,
         ArtistProvider,
         AlbumProvider,
+        InAppBrowser,
     ]
 })
 export class AppModule {

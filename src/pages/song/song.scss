@@ -1,3 +1,69 @@
 page-song {
 
+    .bg-style {
+        background: color($colors, dark, base)
+    }
+
+    #song-avatar-card {
+        border-radius: 0px;
+        webkit-box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.14), 0 0px 0px 0px rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.12);
+        box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.14), 0 0px 0px 0px rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.12);
+    }
+
+    #song-avatar-card-item {
+        background: color($colors, dark, base)
+    }
+
+    #song-avatar-picture {
+        margin: auto;
+        width: 20rem;
+        height: 20rem;
+    }
+
+    #song-card-content-artists-name {
+        color: white;
+        font-size: 1.9rem;
+        word-wrap: break-word;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: center;
+    }
+
+    .listen-option-item {
+        background: color($colors, dark, base);
+        border-bottom: 1px solid white !important;
+    }
+
+    #listen-add-to-playlist-item {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .listen-option-label {
+        color: white;
+        font-size: 2.5rem;
+    }
+
+    .listen-option-avatar {
+        padding-right: 30% !important;
+    }
+    .listen-option-image {
+        width: 50px !important;
+        height: 50px !important;
+    }
+
+    #listen-add-to-playlist-label {
+        color: white;
+        font-size: 3rem;
+    }
+
+    #listen-add-to-playlist-avatar {
+        padding-left: 10% !important;
+    }
+
+    #listen-add-to-playlist-image {
+        width: 50px !important;
+        height: 50px !important;
+    }
+
 }

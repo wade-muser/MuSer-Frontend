@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {Song} from "../../models/Song";
 import {Artist} from "../../models/Artist";
+import {SongPage} from "../song/song";
 
 @Component({
     selector: 'page-home',
@@ -57,7 +58,8 @@ export class HomePage {
     }
 
     goToSongPage(popularSong) {
-        console.log(popularSong);
+        console.log("Go to song:", popularSong);
+        this.navCtrl.push(SongPage, {"data": popularSong});
     }
 
 }
