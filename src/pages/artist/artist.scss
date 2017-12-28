@@ -3,6 +3,7 @@ page-artist {
     .bg-style {
         background: color($colors, dark, base)
     }
+
     #artist-avatar-card {
         border-radius: 0px;
         webkit-box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.14), 0 0px 0px 0px rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.12);
@@ -38,7 +39,6 @@ page-artist {
         word-wrap: break-word;
         overflow: hidden;
         text-overflow: ellipsis;
-
     }
 
     #related-artists-label, #albums-label {

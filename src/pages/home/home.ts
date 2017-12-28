@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {Song} from "../../models/Song";
+import {Artist} from "../../models/Artist";
 
 @Component({
     selector: 'page-home',
@@ -24,17 +25,23 @@ export class HomePage {
         this.charts.push({name: "Popular"})
         this.charts.push({name: "New Release"})
 
+        const artist1 = new Artist("1", "The Weeknd", "https://i.scdn.co/image/a1bbafd8c21c14fd685a3d8efb0906db7c059a97");
+
+
         this.popularSongs = [];
         this.popularSongs.push(new Song(
             "1",
             "PostMalone Rockstar",
+            [artist1],
             "https://i1.sndcdn.com/artworks-oJdxXcIn59Yo-0-t500x500.jpg"
         ));
         this.popularSongs.push(new Song(
             "2",
             "Dua Lipa New Rules",
+            [artist1],
             "https://www.iomoio.com/covers/src/19/436719.jpg"
-        ));
+        ))
+        ;
     }
 
     goToGenrePage(genre) {

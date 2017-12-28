@@ -19,6 +19,10 @@ import {LoginProvider} from '../providers/login/login';
 import {IonicStorageModule} from "@ionic/storage";
 import {AuthorizationProvider} from '../providers/authorization/authorization';
 import {ArtistPage} from "../pages/artist/artist";
+import {ArtistProvider} from '../providers/artist/artist';
+import {AlbumProvider} from '../providers/album/album';
+import {AlbumPage} from "../pages/album/album";
+import {SongPage} from "../pages/song/song";
 
 
 @NgModule({
@@ -32,6 +36,8 @@ import {ArtistPage} from "../pages/artist/artist";
         RegisterPage,
         PresentationPage,
         ArtistPage,
+        AlbumPage,
+        SongPage,
     ],
     imports: [
         BrowserModule,
@@ -50,6 +56,8 @@ import {ArtistPage} from "../pages/artist/artist";
         RegisterPage,
         PresentationPage,
         ArtistPage,
+        AlbumPage,
+        SongPage,
     ],
     providers: [
         StatusBar,
@@ -57,7 +65,9 @@ import {ArtistPage} from "../pages/artist/artist";
         {provide: ErrorHandler, useClass: IonicErrorHandler},
         RegisterProvider,
         LoginProvider,
-        AuthorizationProvider
+        AuthorizationProvider,
+        ArtistProvider,
+        AlbumProvider,
     ]
 })
 export class AppModule {

@@ -1,0 +1,64 @@
+page-album {
+
+    .bg-style {
+        background: color($colors, dark, base)
+    }
+
+    #album-avatar-card {
+        border-radius: 0px;
+        webkit-box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.14), 0 0px 0px 0px rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.12);
+        box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.14), 0 0px 0px 0px rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.12);
+
+    }
+
+    #album-avatar-card-item {
+        background-color: color($colors, dark);
+
+    }
+
+    #album-avatar-picture {
+        margin: auto;
+        width: 20rem;
+        height: 20rem;
+    }
+
+    #album-content-label {
+        color: white;
+        margin-bottom: 14px;
+        margin-top: -14px;
+        padding-left: 14px;
+        padding-bottom: 5px;
+        border-bottom: 1px solid white;
+    }
+
+    #album-card-content-artist-name {
+        color: white;
+        font-size: 1.9rem;
+        word-wrap: break-word;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: center;
+    }
+
+    .album-song-item {
+        background: color($colors, dark, base)
+    }
+
+    .album-song-name {
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        word-wrap: break-word;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .album-song-artists {
+        color: white;
+        font-size: 14px;
+        word-wrap: break-word;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+}
