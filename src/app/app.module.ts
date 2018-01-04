@@ -14,7 +14,7 @@ import {LoginPage} from "../pages/login/login";
 import {RegisterPage} from "../pages/register/register";
 import {PresentationPage} from "../pages/presentation/presentation";
 import {RegisterProvider} from '../providers/register/register';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {LoginProvider} from '../providers/login/login';
 import {IonicStorageModule} from "@ionic/storage";
 import {AuthorizationProvider} from '../providers/authorization/authorization';
@@ -24,6 +24,9 @@ import {AlbumProvider} from '../providers/album/album';
 import {AlbumPage} from "../pages/album/album";
 import {SongPage} from "../pages/song/song";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
+import {SplashPage} from "../pages/splash/splash";
+import {LogoutProvider} from '../providers/logout/logout';
+import {AuthInterceptor} from "../providers/authorization/AuthInterceptor";
 
 
 @NgModule({
@@ -39,6 +42,7 @@ import {InAppBrowser} from "@ionic-native/in-app-browser";
         ArtistPage,
         AlbumPage,
         SongPage,
+        SplashPage,
     ],
     imports: [
         BrowserModule,
@@ -59,17 +63,20 @@ import {InAppBrowser} from "@ionic-native/in-app-browser";
         ArtistPage,
         AlbumPage,
         SongPage,
+        SplashPage,
     ],
     providers: [
         StatusBar,
         SplashScreen,
         {provide: ErrorHandler, useClass: IonicErrorHandler},
+        {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
         RegisterProvider,
         LoginProvider,
         AuthorizationProvider,
         ArtistProvider,
         AlbumProvider,
         InAppBrowser,
+        LogoutProvider,
     ]
 })
 export class AppModule {

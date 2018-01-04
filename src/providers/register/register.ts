@@ -11,7 +11,7 @@ import {Observable} from "rxjs/Observable";
 @Injectable()
 export class RegisterProvider {
 
-    private REGISTER_URL = " https://1jxyzst870.execute-api.eu-west-1.amazonaws.com/dev/register";
+    private REGISTER_URL = "https://vibnm0fjca.execute-api.eu-west-1.amazonaws.com/dev/register";
 
     constructor(private http: HttpClient,) {
         console.log('Hello RegisterProvider Provider');

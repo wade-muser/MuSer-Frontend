@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
+import {LoadingController, MenuController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {RegisterProvider} from "../../providers/register/register";
 import {HttpResponse} from "@angular/common/http";
 import {PresentationPage} from "../presentation/presentation";
@@ -31,7 +31,10 @@ export class RegisterPage {
                 public navParams: NavParams,
                 private registerProvider: RegisterProvider,
                 private loadingController: LoadingController,
-                private toastController: ToastController) {
+                private toastController: ToastController,
+                private menuController: MenuController) {
+
+        this.menuController.swipeEnable(false)
     }
 
     ionViewDidLoad() {

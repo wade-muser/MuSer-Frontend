@@ -11,7 +11,7 @@ import {Observable} from "rxjs/Observable";
 @Injectable()
 export class LoginProvider {
 
-    private LOGIN_URL = "https://1jxyzst870.execute-api.eu-west-1.amazonaws.com/dev/login";
+    private LOGIN_URL = "https://vibnm0fjca.execute-api.eu-west-1.amazonaws.com/dev/login";
 
     constructor(public http: HttpClient) {
         console.log('Hello LoginProvider Provider');

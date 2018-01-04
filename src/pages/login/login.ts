@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
-import {LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
+import {LoadingController, MenuController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {LoginProvider} from "../../providers/login/login";
 import {TabsPage} from "../tabs/tabs";
+import {HttpErrorResponse} from "@angular/common/http";
 
 /**
  * Generated class for the LoginPage page.
@@ -29,9 +30,10 @@ export class LoginPage {
                 public navParams: NavParams,
                 private loginProvider: LoginProvider,
                 private loadingController: LoadingController,
-                private toastController: ToastController) {
+                private toastController: ToastController,
+                private menuController: MenuController) {
 
-        console.log("Init");
+        this.menuController.swipeEnable(false);
     }
 
     ionViewDidLoad() {
@@ -46,13 +48,18 @@ export class LoginPage {
 
         this.loginProvider
             .login(this.credentials)
-            .subscribe((response) => {
-                loading.dismiss();
-                if (response.status == this.HTTP_STATUS_CODE_OK) {
-                    localStorage.setItem(this.LOCALE_STORAGE_TOKEN_KEY, response.body['token']);
-                    this.navCtrl.setRoot(TabsPage);
-                }
-            });
+            .subscribe(
+                (response) => {
+                    loading.dismiss();
+                    if (response.status == this.HTTP_STATUS_CODE_OK) {
+                        localStorage.setItem(this.LOCALE_STORAGE_TOKEN_KEY, response.body['token']);
+                        this.navCtrl.setRoot(TabsPage);
+                    }
+                }, (error: HttpErrorResponse) => {
+                    loading.dismiss();
+                    console.log("Error Occurred");
+                    console.log(error);
+                });
     }
 
     showToastMessage(message: string, duration: number, position: string = "bottom") {

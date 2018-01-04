@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {MenuController, NavController, NavParams} from 'ionic-angular';
 import {LoginPage} from "../login/login";
 import {RegisterPage} from "../register/register";
 
@@ -16,7 +16,10 @@ import {RegisterPage} from "../register/register";
 })
 export class PresentationPage {
 
-    constructor(public navCtrl: NavController, public navParams: NavParams) {
+    constructor(public navCtrl: NavController,
+                public navParams: NavParams,
+                private menuController: MenuController) {
+        this.menuController.swipeEnable(false)
     }
 
     ionViewDidLoad() {

@@ -1,6 +1,7 @@
 import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs/Observable";
+import {NavController} from "ionic-angular";
 
 /*
   Generated class for the AuthorizationProvider provider.
@@ -11,16 +12,24 @@ import {Observable} from "rxjs/Observable";
 @Injectable()
 export class AuthorizationProvider {
 
-    private AUTHORIZATION_URL = "https://1jxyzst870.execute-api.eu-west-1.amazonaws.com/dev/test";
+    private LOCALE_STORAGE_TOKEN_KEY = "token";
+    private AUTHORIZATION_URL = "https://vibnm0fjca.execute-api.eu-west-1.amazonaws.com/dev/test";
 
     constructor(public http: HttpClient) {
         console.log('Hello AuthorizationProvider Provider');
     }
 
-    check(token): Observable<HttpResponse<Object>> {
-        const headers = new HttpHeaders({"Authorization": token})
+    check(): Observable<HttpResponse<Object>> {
         return this.http
-            .get(this.AUTHORIZATION_URL, {headers: headers, observe: "response"});
+            .get(this.AUTHORIZATION_URL, {observe: "response"});
+    }
+
+    getToken(): string {
+        return localStorage.getItem(this.LOCALE_STORAGE_TOKEN_KEY);
+    }
+
+    tokenExists(): boolean {
+        return this.getToken() != undefined;
     }
 
 }
