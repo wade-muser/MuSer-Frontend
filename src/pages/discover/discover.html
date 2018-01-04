@@ -20,18 +20,18 @@
 
     <div id="search-bar">
 
-        <ion-searchbar [disabled]="!filterIsSelected"
+        <ion-searchbar [disabled]="false"
                        [(ngModel)]="searchValue"
                        [showCancelButton]="true"
-                       (ionInput)="onInput($event)"
-                       (ionCancel)="onCancel($event)">
+                       (search)="search($event)">
         </ion-searchbar>
+
 
         <ion-grid>
             <ion-row col-12>
-
                 <ion-col>
-                    <ion-chip class="search-chip" (click)="showSelectSearchFilterDialog()" *ngIf="!filterIsSelected">
+                    <ion-chip class="search-chip" (click)="showSelectSearchFilterDialog()"
+                              *ngIf="!filterIsSelected">
                         <ion-label>
                             Select Filter
                         </ion-label>
@@ -54,26 +54,57 @@
         </ion-grid>
     </div>
 
+
     <div id="search-result-artists" *ngIf="filterIsSelected">
         <ion-grid>
             <ion-row col-12>
-                <ion-col col-2>
-                </ion-col>
+                <ion-col col-2></ion-col>
+
                 <ion-col col-8>
-                    <ion-card *ngFor="let searchResult of searchResults" class="result-card">
-                        <img class="card-image" [src]="searchResult.imageUrl" (click)="goToResultPage(searchResult)"
-                             onerror="this.src='../../assets/imgs/album_cover_alternative.jpg'">
-                        <ion-card-content class="result-card-content">
-                            <p class="result-name">
-                                {{searchResult.name}}
-                            </p>
-                        </ion-card-content>
+                    <ion-card class="result-card_round" *ngFor="let searchResult of searchResults">
+                        <ion-item class="result-card-item">
+                            <ion-avatar>
+                                <img class="result-card-image" [src]="searchResult.imageUrl"
+                                     (click)="goToResultPage(searchResult)"
+                                     onerror="this.src='../../assets/imgs/album_cover_alternative.jpg'">
+                            </ion-avatar>
+
+                            <ion-card-content class="result-card-content">
+                                <p class="result-name">
+                                    {{searchResult.name}}
+                                </p>
+                            </ion-card-content>
+                        </ion-item>
                     </ion-card>
                 </ion-col>
-                <ion-col col-2>
-                </ion-col>
+
+                <ion-col col-2></ion-col>
             </ion-row>
         </ion-grid>
+
     </div>
+
+
+    <!--<div id="search-result-artists" *ngIf="filterIsSelected">-->
+    <!--<ion-grid>-->
+    <!--<ion-row col-12>-->
+    <!--<ion-col col-2>-->
+    <!--</ion-col>-->
+    <!--<ion-col col-8>-->
+    <!--<ion-card *ngFor="let searchResult of searchResults" class="result-card">-->
+    <!--<img class="card-image" [src]="searchResult.imageUrl" (click)="goToResultPage(searchResult)"-->
+    <!--onerror="this.src='../../assets/imgs/album_cover_alternative.jpg'">-->
+    <!--<ion-card-content class="result-card-content">-->
+    <!--<p class="result-name">-->
+    <!--{{searchResult.name}}-->
+    <!--</p>-->
+    <!--</ion-card-content>-->
+    <!--</ion-card>-->
+    <!--</ion-col>-->
+    <!--<ion-col col-2>-->
+    <!--</ion-col>-->
+    <!--</ion-row>-->
+    <!--</ion-grid>-->
+    <!--</div>-->
 
 </ion-content>

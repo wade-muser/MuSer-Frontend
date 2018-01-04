@@ -1,7 +1,6 @@
-import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs/Observable";
-import {NavController} from "ionic-angular";
 
 /*
   Generated class for the AuthorizationProvider provider.

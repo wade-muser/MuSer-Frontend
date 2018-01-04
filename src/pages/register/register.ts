@@ -34,7 +34,7 @@ export class RegisterPage {
                 private toastController: ToastController,
                 private menuController: MenuController) {
 
-        this.menuController.swipeEnable(false)
+        this.menuController.swipeEnable(false);
     }
 
     ionViewDidLoad() {

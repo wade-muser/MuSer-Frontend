@@ -1,12 +1,10 @@
 import {Component} from '@angular/core';
-import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
-import {Artist} from "../../models/Artist";
+import {AlertController, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {ArtistPage} from "../artist/artist";
 import {AlbumPage} from "../album/album";
 import {Page} from "ionic-angular/umd/navigation/nav-util";
-import {Song} from "../../models/Song";
 import {SongPage} from "../song/song";
-import {Album} from "../../models/Album";
+import {DiscoverProvider} from "../../providers/discover/discover";
 
 /**
  * Generated class for the DiscoverPage page.
@@ -21,42 +19,32 @@ import {Album} from "../../models/Album";
     templateUrl: 'discover.html',
 })
 export class DiscoverPage {
-    searchResults: Array<any>;
 
-    searchValue;
+    searchResults: Array<any>;
+    searchValue: "";
     filterIsSelected = false;
     selectedFilter: string;
     filterToComponentPage: Map<string, Page>;
 
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
-                private alertController: AlertController) {
+                private alertController: AlertController,
+                private discoverService: DiscoverProvider,
+                private loadingController: LoadingController) {
 
         this.selectedFilter = "";
-
-        this.searchResults = [
-            new Artist(
-                "",
-                "The Weeknd",
-                "https://i1.sndcdn.com/artworks-oJdxXcIn59Yo-0-t500x500.jpg"
-            ),
-            new Artist(
-                "",
-                "Dua Lipa",
-                "https://www.iomoio.com/covers/src/19/436719.jpg"
-            )
-
-        ];
-        this.searchResults.push(new Album("1", "Starboy", "https://i.scdn.co/image/818cf2dcae465de2c48c791829b1ca03606989a1", this.searchResults[0]))
-
-        this.filterToComponentPage = new Map();
-        this.filterToComponentPage.set("Artist", ArtistPage);
-        this.filterToComponentPage.set("Album", AlbumPage);
-        this.filterToComponentPage.set("Track", SongPage);
+        this.initializeSearchFilters();
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad DiscoverPage');
+    }
+
+    initializeSearchFilters(): void {
+        this.filterToComponentPage = new Map();
+        this.filterToComponentPage.set("Artist", ArtistPage);
+        this.filterToComponentPage.set("Album", AlbumPage);
+        this.filterToComponentPage.set("Track", SongPage);
     }
 
     showSelectSearchFilterDialog() {
@@ -93,20 +81,49 @@ export class DiscoverPage {
             }
         });
         alert.present();
-
     }
 
     removeFilter(filterChip: Element) {
         filterChip.remove();
         this.filterIsSelected = false;
         this.selectedFilter = "";
+        this.searchResults.length = 0;
     }
 
-    onInput(event) {
-        console.log(this.searchValue)
+    search(event: Event) {
+        if (!this.filterIsSelected) {
+            this.showAlertDialog("Filter Select", "A filter must be selected to perform the search");
+            return;
+        }
+
+        let loading = this.loadingController.create({
+            content: '',
+            spinner: 'dots',
+            cssClass: 'transparent',
+            duration: 1500
+        });
+        loading.present();
+
+        this.discoverService
+            .search(this.searchValue, this.selectedFilter)
+            .subscribe(
+                data => {
+                    this.searchResults = data;
+                }, err => {
+                    this.showAlertDialog("Ups..", "Some error occurred. Please try again.")
+                }
+            );
+
     }
 
-    onCancel(event) {
+    showAlertDialog(title: string, message: string) {
+        let alert = this.alertController.create({
+            title: "Filter select",
+            message: "A filter must be selected to perform the search",
+            buttons: ['Ok']
+
+        });
+        alert.present();
     }
 
     goToResultPage(searchResult: any) {

@@ -27,6 +27,7 @@ import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {SplashPage} from "../pages/splash/splash";
 import {LogoutProvider} from '../providers/logout/logout';
 import {AuthInterceptor} from "../providers/authorization/AuthInterceptor";
+import {DiscoverProvider} from '../providers/discover/discover';
 
 
 @NgModule({
@@ -77,6 +78,7 @@ import {AuthInterceptor} from "../providers/authorization/AuthInterceptor";
         AlbumProvider,
         InAppBrowser,
         LogoutProvider,
+        DiscoverProvider,
     ]
 })
 export class AppModule {

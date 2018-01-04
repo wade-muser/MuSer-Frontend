@@ -41,7 +41,7 @@ $text-input-highlight-color-valid: color($colors, purple);
 $text-input-highlight-color-invalid: #ff0003;
 
 $tabs-background: #210404;
-$tabs-border-color:white;
+$tabs-border-color: white;
 
 $tabs-md-tab-text-color-active: white;
 $tabs-md-tab-icon-color-active: white;
@@ -53,6 +53,9 @@ $tabs-ios-tab-text-color-active: white;
 $tabs-ios-tab-icon-color-active: white;
 $tabs-ios-tab-text-color: color($colors, grey);
 $tabs-ios-tab-icon-color: color($colors, grey);
+
+$item-md-divider-border-bottom: white;
+$list-md-header-border-top: white;
 
 // App iOS Variables
 // --------------------------------------------------

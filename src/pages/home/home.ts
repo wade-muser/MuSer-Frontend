@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import {MenuController, NavController} from 'ionic-angular';
 import {Song} from "../../models/Song";
 import {Artist} from "../../models/Artist";
 import {SongPage} from "../song/song";
@@ -14,7 +14,11 @@ export class HomePage {
     charts: Array<{ name: string }>;
     popularSongs: Array<Song>;
 
-    constructor(public navCtrl: NavController) {
+    constructor(public navCtrl: NavController, public menuController: MenuController) {
+
+        this.menuController.swipeEnable(true);
+
+
         this.genres = [];
         this.genres.push({name: "Pop"});
         this.genres.push({name: "R'N'B"});

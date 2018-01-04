@@ -19,7 +19,8 @@ export class PresentationPage {
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
                 private menuController: MenuController) {
-        this.menuController.swipeEnable(false)
+
+        this.menuController.swipeEnable(false);
     }
 
     ionViewDidLoad() {

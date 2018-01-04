@@ -1,5 +1,10 @@
 page-discover {
 
+    .my-loading-class {
+        background-color: transparent;
+        box-shadow: none;
+    }
+
     ion-title {
         text-align: center;
         margin-right: 4.5rem;
@@ -28,19 +33,62 @@ page-discover {
     .result-card {
         background-color: color($colors, dark);
         margin-bottom: 3rem;
+        webkit-box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.14), 0 0px 0px 0px rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.12);
+        box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.14), 0 0px 0px 0px rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.12);
     }
 
     .result-card-content {
         background-color: color($colors, dark);
         -webkit-box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0);
         -moz-box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0);
-        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+        webkit-box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.14), 0 0px 0px 0px rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.12);
+        box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.14), 0 0px 0px 0px rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.12);
         text-align: center;
     }
     .result-name {
         color: white;
         font-weight: bold;
         font-size: 1.7rem;
+        word-wrap: break-word;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    // Circle result cards
+
+    .search-result-artists {
+        margin-top: -10px;
+    }
+
+    .result-card_round {
+        display: inline-block;
+        width: 100%;
+        border-radius: 0px;
+        margin-left: 0px;
+        webkit-box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.14), 0 0px 0px 0px rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.12);
+        box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.14), 0 0px 0px 0px rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.12);
+        margin-bottom: -15px;
+    }
+
+    .result-card-item {
+        background: color($colors, dark);
+    }
+
+    .result-card-image {
+        margin: auto;
+        width: 100% !important;
+        height: 15rem !important;
+    }
+
+    .result-card-content {
+        background: color($colors, dark);
+        text-align: center;
+        word-wrap: break-word;
+    }
+
+    .result-name {
+        color: white;
+        font-size: 1.9rem;
         word-wrap: break-word;
         overflow: hidden;
         text-overflow: ellipsis;

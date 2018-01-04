@@ -20,3 +20,65 @@
     top: 0;
     left: 0;
 }
+
+.slide_menu_color {
+    background: #30251f;
+    color: white;
+}
+
+.item-divider {
+    border-bottom: 1px solid white;
+    border-top: 1px solid white;
+}
+
+.transparent {
+    .loading-wrapper {
+        background: transparent;
+        box-shadow: none;
+
+        .spinner-crescent circle {
+            stroke-width: 18px !important;
+            stroke: white;
+        }
+    }
+}
+
+ion-spinner {
+    * {
+        stroke: white !important;
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    &.spinner-circles circle,
+    &.spinner-bubbles circle,
+    &.spinner-dots circle {
+        fill: white !important;
+    }
+}
+
+.menu-profile-card {
+    -webkit-box-shadow: none !important;
+    padding-top: 20px;
+}
+
+#card-username {
+    color: white;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.custom-avatar {
+    margin-top: 10px;
+    height: 30vw;
+    width: 30vw;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#logout {
+
+}

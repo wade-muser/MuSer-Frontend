@@ -1,15 +1,14 @@
-<ion-menu [content]="content">
-    <ion-header>
-        <ion-toolbar>
-            <ion-title>Menu</ion-title>
-        </ion-toolbar>
-    </ion-header>
+<ion-menu [content]="content" color="dark">
 
-    <ion-content>
-        <ion-list>
-            <button ion-item menuClose (click)="removeToken()">
+    <ion-content class="slide_menu_color">
+        <ion-card text-center class="menu-profile-card slide_menu_color">
+            <img src="../assets/imgs/person.png" class="custom-avatar"/>
+            <h1 id="card-username">Name</h1>
+        </ion-card>
+        <ion-list class="slide_menu_color item-divider positive-bg light">
+            <ion-item class="slide_menu_color" id="menu-logout" menuClose (click)="logout()">
                 Logout
-            </button>
+            </ion-item>
         </ion-list>
     </ion-content>
 </ion-menu>

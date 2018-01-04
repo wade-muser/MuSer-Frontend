@@ -5,6 +5,7 @@ import {Artist} from "../../models/Artist";
 import {Album} from "../../models/Album";
 import {Event} from "../../models/event";
 import {ArtistProvider} from "../../providers/artist/artist";
+import {SongPage} from "../song/song";
 
 /**
  * Generated class for the ArtistPage page.

@@ -84,4 +84,5 @@ export class MyApp {
         console.log("Emit event");
         this.event.publish(this.DISMISS_SPLASH_SCREEN_TOPIC, data);
     }
+
 }
