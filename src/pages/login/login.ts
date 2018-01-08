@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {LoadingController, MenuController, NavController, NavParams, ToastController} from 'ionic-angular';
+import {LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {LoginProvider} from "../../providers/login/login";
 import {TabsPage} from "../tabs/tabs";
 import {HttpErrorResponse} from "@angular/common/http";
@@ -30,8 +30,7 @@ export class LoginPage {
                 public navParams: NavParams,
                 private loginProvider: LoginProvider,
                 private loadingController: LoadingController,
-                private toastController: ToastController,
-                private menuController: MenuController) {
+                private toastController: ToastController) {
 
         // this.menuController.swipeEnable(false);
     }

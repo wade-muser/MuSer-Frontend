@@ -1,26 +1,46 @@
 <ion-header>
-    <ion-navbar>
+    <ion-navbar color="dark">
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
         <ion-title>Library</ion-title>
     </ion-navbar>
+    <ion-toolbar color="dark">
+        <ion-segment [(ngModel)]="currentSegmentPage" (ionChange)="onSegmentChanged($event)">
+            <ion-segment-button value="Playlists Page">
+                First
+            </ion-segment-button>
+            <ion-segment-button value="Generate Playlists">
+                Second
+            </ion-segment-button>
+            <ion-segment-button value="Smart Playlists">
+                Third
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+
 </ion-header>
 
 
-<ion-content>
-    <ion-list>
-        <ion-list-header>Follow us on Twitter</ion-list-header>
-        <ion-item>
-            <ion-icon name="ionic" item-start></ion-icon>
-            @ionicframework
-        </ion-item>
-    </ion-list>
+<ion-content (swipe)="swipeEvent($event)">
 
-    <ion-chip #chip1>
-        <ion-label>Default</ion-label>
-        <button ion-button clear color="light" (click)="delete(chip1)">
-            <ion-icon name="close-circle"></ion-icon>
-        </button>
-    </ion-chip>
+    <div id="content" [ngSwitch]="currentSegmentPage">
+        <div *ngSwitchCase="pages[0]">
+            <h1>
+                User's Playlists
+            </h1>
+        </div>
+        <div *ngSwitchCase="pages[1]">
+            <h1>
+                Generate Playlists
+            </h1>
+        </div>
+        <div *ngSwitchCase="pages[2]">
+            <h1>
+                Smart Playlists
+            </h1>
+        </div>
+    </div>
+
 </ion-content>
+
