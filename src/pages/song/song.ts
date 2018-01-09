@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
-import {Song} from "../../models/Song"
+import {Song} from "../../models/song"
 import {InAppBrowser, InAppBrowserOptions} from "@ionic-native/in-app-browser";
 
 

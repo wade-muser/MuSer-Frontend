@@ -1,7 +1,7 @@
 /**
  * Created by Ciprian at 12/14/2017
  */
-import {Artist} from "./Artist";
+import {Artist} from "./artist";
 
 
 export class Song {

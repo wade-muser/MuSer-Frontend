@@ -8,13 +8,17 @@
     <ion-toolbar color="dark">
         <ion-segment [(ngModel)]="currentSegmentPage" (ionChange)="onSegmentChanged($event)">
             <ion-segment-button value="Playlists Page">
-                First
+                <ion-icon name="musical-note"></ion-icon>
+                Saved
             </ion-segment-button>
             <ion-segment-button value="Generate Playlists">
-                Second
+                <!--<ion-icon name="hammer"></ion-icon>-->
+                <ion-icon name="pricetags"></ion-icon>
+                Generate
             </ion-segment-button>
             <ion-segment-button value="Smart Playlists">
-                Third
+                <ion-icon name="cloud-download"></ion-icon>
+                Smart
             </ion-segment-button>
         </ion-segment>
     </ion-toolbar>
@@ -22,13 +26,38 @@
 </ion-header>
 
 
-<ion-content (swipe)="swipeEvent($event)">
+<!--<ion-content (swipe)="swipeEvent($event)" id="bg-style">-->
+<ion-content id="bg-style">
+
 
     <div id="content" [ngSwitch]="currentSegmentPage">
         <div *ngSwitchCase="pages[0]">
-            <h1>
-                User's Playlists
-            </h1>
+
+            <ion-list no-lines id="user-playlists"
+                      *ngFor="let playlist of userPlaylists; let playlistIndex=index">
+                <ion-item-group>
+                    <ion-item-divider color="dark" class="playlist-name">
+                        {{playlist.name}}
+                    </ion-item-divider>
+                    <ion-item-sliding *ngFor="let song of playlist.songs; let songIndex=index">
+                        <ion-item class="playlist-item" (click)="goToSongPage(song)">
+                            <ion-avatar item-start>
+                                <img class="song-avatar" [src]="song.imageUrl">
+                            </ion-avatar>
+                            <h2 class="song-name">
+                                {{song.getArtist()}} {{song.name}}
+                            </h2>
+                        </ion-item>
+                        <ion-item-options side="right" (ionSwipe)="deleteSong(song,songIndex,playlist,playlistIndex)">
+                            <button ion-button expandable class="slide-button-option"
+                                    (click)="deleteSong(song,songIndex,playlist,playlistIndex)">
+                                <ion-icon name="trash"></ion-icon>
+                                Delete
+                            </button>
+                        </ion-item-options>
+                    </ion-item-sliding>
+                </ion-item-group>
+            </ion-list>
         </div>
         <div *ngSwitchCase="pages[1]">
             <h1>

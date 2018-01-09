@@ -1,11 +1,12 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
-import {Song} from "../../models/Song";
-import {Artist} from "../../models/Artist";
-import {Album} from "../../models/Album";
+import {Song} from "../../models/song";
+import {Artist} from "../../models/artist";
+import {Album} from "../../models/album";
 import {Event} from "../../models/event";
 import {ArtistProvider} from "../../providers/artist/artist";
 import {SongPage} from "../song/song";
+import {AlbumPage} from "../album/album";
 
 /**
  * Generated class for the ArtistPage page.
@@ -66,14 +67,17 @@ export class ArtistPage {
 
     goToSongPage(popularSong: Song): void {
         console.log("Go to song:", popularSong);
+        this.navCtrl.push(SongPage, {data: popularSong});
     }
 
     goToArtistPage(artist: Artist): void {
         console.log("Go to artist song:", artist);
+        this.navCtrl.push(ArtistPage, {data: artist});
     }
 
     goToAlbumPage(album: Album) {
         console.log("Go to album:", album);
+        this.navCtrl.push(AlbumPage, {data: album});
     }
 
     goToEventPage(event: Event) {

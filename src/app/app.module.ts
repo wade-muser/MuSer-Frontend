@@ -28,7 +28,7 @@ import {SplashPage} from "../pages/splash/splash";
 import {LogoutProvider} from '../providers/logout/logout';
 import {AuthInterceptor} from "../providers/authorization/AuthInterceptor";
 import {DiscoverProvider} from '../providers/discover/discover';
-import {SuperTabsModule} from "ionic2-super-tabs";
+import {PlaylistProvider} from '../providers/playlist/playlist';
 
 @NgModule({
     declarations: [
@@ -50,7 +50,6 @@ import {SuperTabsModule} from "ionic2-super-tabs";
         HttpClientModule,
         IonicModule.forRoot(MyApp),
         IonicStorageModule.forRoot(),
-        SuperTabsModule.forRoot(),
     ],
     bootstrap: [IonicApp],
     entryComponents: [
@@ -80,6 +79,7 @@ import {SuperTabsModule} from "ionic2-super-tabs";
         InAppBrowser,
         LogoutProvider,
         DiscoverProvider,
+        PlaylistProvider,
     ]
 })
 export class AppModule {

@@ -1,10 +1,10 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Artist} from "../../models/Artist";
+import {Artist} from "../../models/artist";
 import {Observable} from "rxjs/Observable";
-import {Album} from "../../models/Album";
+import {Album} from "../../models/album";
 import {of} from "rxjs/observable/of";
-import {Song} from "../../models/Song";
+import {Song} from "../../models/song";
 
 /*
   Generated class for the DiscoverProvider provider.

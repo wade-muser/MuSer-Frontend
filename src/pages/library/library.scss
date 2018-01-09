@@ -1,4 +1,37 @@
 page-library {
 
-}
+    #bg-style {
+        background: color($colors, dark, base)
+    }
 
+    #user-playlists {
+        background: color($colors, dark);
+    }
+
+    .playlist-name {
+        font-weight: bold;
+        font-size: 2rem;
+    }
+
+    .playlist-item {
+        background: color($colors, dark);
+    }
+
+    .song-avatar {
+        height: 60px !important;
+        width: 60px !important;
+    }
+
+    .song-name {
+        font-size: 1.7rem;
+        color: white;
+        word-wrap: break-word;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .slide-button-option {
+        background: red;
+    }
+
+}

@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {MenuController, NavController} from 'ionic-angular';
-import {Song} from "../../models/Song";
-import {Artist} from "../../models/Artist";
+import {Song} from "../../models/song";
+import {Artist} from "../../models/artist";
 import {SongPage} from "../song/song";
 
 @Component({

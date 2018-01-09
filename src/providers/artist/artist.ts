@@ -1,10 +1,10 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Song} from "../../models/Song";
+import {Song} from "../../models/song";
 import {Observable} from "rxjs/Observable";
 import {of} from "rxjs/observable/of";
-import {Artist} from "../../models/Artist";
-import {Album} from "../../models/Album";
+import {Artist} from "../../models/artist";
+import {Album} from "../../models/album";
 import {Event} from "../../models/event";
 
 /*

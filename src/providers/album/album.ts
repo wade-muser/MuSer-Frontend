@@ -2,8 +2,8 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import {of} from "rxjs/observable/of";
-import {Song} from "../../models/Song";
-import {Artist} from "../../models/Artist";
+import {Song} from "../../models/song";
+import {Artist} from "../../models/artist";
 
 /*
   Generated class for the AlbumProvider provider.

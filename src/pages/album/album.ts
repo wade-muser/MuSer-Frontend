@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
-import {Album} from "../../models/Album";
+import {Album} from "../../models/album";
 import {AlbumProvider} from "../../providers/album/album";
-import {Song} from "../../models/Song";
+import {Song} from "../../models/song";
 
 /**
  * Generated class for the AlbumPage page.
