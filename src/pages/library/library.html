@@ -48,9 +48,10 @@
                                 {{song.getArtist()}} {{song.name}}
                             </h2>
                         </ion-item>
-                        <ion-item-options side="right" (ionSwipe)="deleteSong(song,songIndex,playlist,playlistIndex)">
+                        <ion-item-options side="right"
+                                          (ionSwipe)="deleteSongFromPlaylist(song,songIndex,playlist,playlistIndex)">
                             <button ion-button expandable class="slide-button-option"
-                                    (click)="deleteSong(song,songIndex,playlist,playlistIndex)">
+                                    (click)="deleteSongFromPlaylist(song,songIndex,playlist,playlistIndex)">
                                 <ion-icon name="trash"></ion-icon>
                                 Delete
                             </button>
@@ -60,9 +61,55 @@
             </ion-list>
         </div>
         <div *ngSwitchCase="pages[1]">
-            <h1>
-                Generate Playlists
-            </h1>
+
+            <ion-grid>
+                <ion-row col-12>
+                    <ion-col>
+                        <ion-chip class="search-chip" *ngFor="let artistTag of searchedArtistTags">
+                            <ion-label>
+                                {{artistTag}}
+                            </ion-label>
+                            <button class="chip-button" ion-button clear color="light"
+                                    (click)="removeArtistTag( artistTag)">
+                                <ion-icon name="close-circle"></ion-icon>
+                            </button>
+
+                        </ion-chip>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+            <div id="search-bar" *ngIf="searchedArtistTags.length<3">
+                <ion-searchbar [disabled]="false"
+                               [(ngModel)]="searchArtistValue "
+                               [showCancelButton]="true"
+                               (search)="searchArtists($event)">
+                </ion-searchbar>
+                <ion-list *ngIf="showAutocompleteList" id="list_autocomplete_artists">
+                    <ion-item *ngFor="let artist of autocompleteArtists" class="autocomplete_artist"
+                              (click)="selectArtistAutocomplete(artist)">
+                        {{artist.name}}
+                    </ion-item>
+                </ion-list>
+            </div>
+
+            <div *ngIf="generatedPlaylistSongs.length>0">
+                <h2 id="generated-playlist-label">
+                    Generated Playlist
+                </h2>
+                <ion-list *ngFor="let song of generatedPlaylistSongs" id="generated-playlist">
+                    <ion-item class="playlist-item" (click)="goToSongPage(song)">
+                        <ion-avatar item-start>
+                            <img class="song-avatar" [src]="song.imageUrl">
+                        </ion-avatar>
+                        <h2 class="song-name">
+                            {{song.getArtist()}} {{song.name}}
+                        </h2>
+                    </ion-item>
+                </ion-list>
+            </div>
+
+
         </div>
         <div *ngSwitchCase="pages[2]">
             <h1>

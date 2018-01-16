@@ -4,8 +4,9 @@ page-library {
         background: color($colors, dark, base)
     }
 
-    #user-playlists {
+    #user-playlists, #generated-playlist {
         background: color($colors, dark);
+        margin: -1px 0px 0px !important;
     }
 
     .playlist-name {
@@ -32,6 +33,31 @@ page-library {
 
     .slide-button-option {
         background: red;
+    }
+
+    // Generate playlists using tags
+    .autocomplete_artist {
+        background-color: color($colors, dark);
+        color: white;
+        font-weight: 500;
+    }
+
+    .search-chip {
+        background-color: color($colors, purple);
+        color: white;
+        font-weight: bold;
+        font-size: 1.5rem;
+    }
+
+    .chip-button {
+        background-color: color($colors, purple);
+        font-size: 1.5rem
+    }
+
+    #generated-playlist-label {
+        color: white;
+        margin-left: 15px;
+        margin-bottom: 15px;
     }
 
 }

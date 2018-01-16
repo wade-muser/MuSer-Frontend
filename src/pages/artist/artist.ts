@@ -71,7 +71,7 @@ export class ArtistPage {
     }
 
     goToArtistPage(artist: Artist): void {
-        console.log("Go to artist song:", artist);
+        console.log("Go to autocompleteArtists song:", artist);
         this.navCtrl.push(ArtistPage, {data: artist});
     }
 
