@@ -44,7 +44,10 @@ export class RegisterPage {
     register(): void {
         console.log(this.credentials);
         const loading = this.loadingController.create({
-            content: "Please wait..."
+            content: '',
+            spinner: 'dots',
+            cssClass: "transparent",
+            duration: 1500,
         });
         loading.present();
 
@@ -67,7 +70,6 @@ export class RegisterPage {
             message: message,
             duration: duration,
             position: position,
-
         });
         toast.present();
     }

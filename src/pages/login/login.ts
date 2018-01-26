@@ -41,7 +41,9 @@ export class LoginPage {
 
     login(): void {
         const loading = this.loadingController.create({
-            content: "Please wait..."
+            content: "",
+            spinner: "dots",
+            cssClass: "transparent",
         });
         loading.present();
 
