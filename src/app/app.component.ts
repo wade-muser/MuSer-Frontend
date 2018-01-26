@@ -53,8 +53,10 @@ export class MyApp {
     }
 
     logout(): void {
+        console.log("Logout");
         this.logoutService.removeToken();
-        this.rootPage = PresentationPage;
+        this.nav.setRoot(PresentationPage);
+        // this.rootPage = PresentationPage;
     }
 
     showSplashScreen(): void {

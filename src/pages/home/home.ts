@@ -3,6 +3,7 @@ import {MenuController, NavController} from 'ionic-angular';
 import {Song} from "../../models/song";
 import {Artist} from "../../models/artist";
 import {SongPage} from "../song/song";
+import {GenrePage} from "../genre/genre";
 
 @Component({
     selector: 'page-home',
@@ -51,6 +52,7 @@ export class HomePage {
 
     goToGenrePage(genre) {
         console.log(`Navigate to genre:${genre}`);
+        this.navCtrl.push(GenrePage);
     }
 
     goToChartPage(chart) {

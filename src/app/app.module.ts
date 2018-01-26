@@ -29,6 +29,7 @@ import {LogoutProvider} from '../providers/logout/logout';
 import {AuthInterceptor} from "../providers/authorization/AuthInterceptor";
 import {DiscoverProvider} from '../providers/discover/discover';
 import {PlaylistProvider} from '../providers/playlist/playlist';
+import {GenrePage} from "../pages/genre/genre";
 
 @NgModule({
     declarations: [
@@ -44,6 +45,7 @@ import {PlaylistProvider} from '../providers/playlist/playlist';
         AlbumPage,
         SongPage,
         SplashPage,
+        GenrePage,
     ],
     imports: [
         BrowserModule,
@@ -65,6 +67,7 @@ import {PlaylistProvider} from '../providers/playlist/playlist';
         AlbumPage,
         SongPage,
         SplashPage,
+        GenrePage,
     ],
     providers: [
         StatusBar,

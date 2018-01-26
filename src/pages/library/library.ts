@@ -145,7 +145,7 @@ export class LibraryPage {
             content: '',
             spinner: 'dots',
             cssClass: "transparent",
-            duration: 1500
+            duration: 1500,
         });
         loading.present();
 
