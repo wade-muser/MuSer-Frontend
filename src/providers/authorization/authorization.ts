@@ -12,7 +12,7 @@ import {Observable} from "rxjs/Observable";
 export class AuthorizationProvider {
 
     private LOCALE_STORAGE_TOKEN_KEY = "token";
-    private AUTHORIZATION_URL = "https://vibnm0fjca.execute-api.eu-west-1.amazonaws.com/dev/test";
+    private AUTHORIZATION_URL = "https://mawk0772fg.execute-api.eu-west-1.amazonaws.com/dev/test";
 
     constructor(public http: HttpClient) {
         console.log('Hello AuthorizationProvider Provider');

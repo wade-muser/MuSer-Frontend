@@ -1,4 +1,4 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Artist} from "../../models/artist";
 import {Observable} from "rxjs/Observable";
@@ -18,6 +18,11 @@ export class DiscoverProvider {
     artists: Array<Artist>
     albums: Array<Album>
 
+    ARTISTS_URL = "https://mawk0772fg.execute-api.eu-west-1.amazonaws.com/dev/artists";
+    ALBUMS_URL = "https://mawk0772fg.execute-api.eu-west-1.amazonaws.com/dev/albums";
+    SONGS_URL = "https://mawk0772fg.execute-api.eu-west-1.amazonaws.com/dev/songs";
+
+
     constructor(public http: HttpClient) {
         this.artists = [
             new Artist(
@@ -35,7 +40,7 @@ export class DiscoverProvider {
                 "https://i.scdn.co/image/818cf2dcae465de2c48c791829b1ca03606989a1", this.artists[0])];
     }
 
-    search(name: string, searchFilter: string): Observable<Array<Artist>> {
+    search(name: string, searchFilter: string): Observable<HttpResponse<Object>> {
         switch (searchFilter) {
             case "Artist":
                 return this.getArtists(name);
@@ -43,24 +48,36 @@ export class DiscoverProvider {
                 return this.getAlbums(name);
             case "Track":
                 return this.getTracks(name);
-            default:
-                return of([]);
         }
     }
 
-    getArtists(name: string): Observable<Array<Artist>> {
-        console.log("Search artists:", name);
-        return of(this.artists);
+    getArtists(name: string): Observable<HttpResponse<Object>> {
+
+        return this.http.get(this.ARTISTS_URL, {
+            params: {
+                name: name,
+                type: "artist"
+            },
+            observe: "response"
+        });
     }
 
-    getAlbums(name: string): Observable<Array<Album>> {
-        console.log("Search albums:", name);
-        return of(this.albums);
+    getAlbums(name: string): Observable<HttpResponse<Object>> {
+        return this.http.get(this.ALBUMS_URL, {
+            params: {
+                name: name,
+            },
+            observe: "response"
+        });
     }
 
-    getTracks(name: string): Observable<Array<Song>> {
-        console.log("Search tracks:", name);
-        return of([]);
+    getTracks(name: string): Observable<HttpResponse<Object>> {
+        return this.http.get(this.SONGS_URL, {
+            params: {
+                name: name,
+            },
+            observe: "response"
+        });
     }
 
 }

@@ -5,6 +5,7 @@ import {AlbumPage} from "../album/album";
 import {Page} from "ionic-angular/umd/navigation/nav-util";
 import {SongPage} from "../song/song";
 import {DiscoverProvider} from "../../providers/discover/discover";
+import {Artist} from "../../models/artist";
 
 /**
  * Generated class for the DiscoverPage page.
@@ -108,12 +109,18 @@ export class DiscoverPage {
             .search(this.searchValue, this.selectedFilter)
             .subscribe(
                 data => {
-                    this.searchResults = data;
+                    this.searchResults = [];
+                    Object.keys(data.body.results).forEach(key => {
+                        this.searchResults.push({
+                            "id": key,
+                            "name": data.body.results[key].name[0],
+                            "imageUrl": data.body.results[key].imageURL[0]
+                        });
+                    })
                 }, err => {
                     this.showAlertDialog("Ups..", "Some error occurred. Please try again.")
                 }
             );
-
     }
 
     showAlertDialog(title: string, message: string) {
