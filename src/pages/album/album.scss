@@ -31,7 +31,7 @@ page-album {
         text-align: center;
     }
 
-    #album-content-label {
+    .album-content-label, .album-recommendations-label {
         color: white;
         margin-bottom: 14px;
         margin-top: -14px;
@@ -40,11 +40,11 @@ page-album {
         border-bottom: 1px solid white;
     }
 
-    .album-song-item {
+    .album-song-item, .album-recommended-item {
         background: color($colors, dark, base)
     }
 
-    .album-song-name {
+    .album-song-name, .album-name {
         color: white;
         font-weight: bold;
         font-size: 20px;

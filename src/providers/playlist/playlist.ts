@@ -1,10 +1,12 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {of} from "rxjs/observable/of";
 import {Song} from "../../models/song";
 import {Observable} from "rxjs/Observable";
 import {Artist} from "../../models/artist";
 import {Playlist} from "../../models/playlist";
+import {APIUtils} from "../APIProvider";
+import {Constants} from "../../utils/constants";
 
 /*
   Generated class for the PlaylistProvider provider.
@@ -18,6 +20,10 @@ export class PlaylistProvider {
     artist1: Artist;
     songs1: Array<Song>;
     songs2: Array<Song>;
+
+    PLAYLISTS_URL = `${Constants.API_URL}/playlists`;
+    SMART_PLAYLIST_URL = `${Constants.API_URL}/playlists/smartgens`;
+    private LOCALE_STORAGE_EMAIL = "email";
 
 
     constructor(public http: HttpClient) {
@@ -36,22 +42,95 @@ export class PlaylistProvider {
         ]
     }
 
-    getUserPlaylists(): Observable<Array<Playlist>> {
-        return of([new Playlist("Playlist1", this.songs1), new Playlist("Playlist2", this.songs2)]);
-    }
-
-    generatePlaylist(artists: Array<string>): Observable<Array<Song>> {
+    generatePlaylist(artists: Array<Artist>): Observable<HttpResponse<Object>> {
         console.log("Generate playlist for artists:" + artists);
-        console.log(this.songs1);
-        return of(this.songs1);
+
+        const artistIds = [];
+        artists.forEach(artist => {
+            artistIds.push(APIUtils.extractId(artist.id));
+        })
+        const url = this.SMART_PLAYLIST_URL;
+        const body = {
+            emailCreator: localStorage.getItem(this.LOCALE_STORAGE_EMAIL),
+            artists: artistIds,
+        }
+        console.log(url);
+
+        return this.http.post(url, body, {
+            observe: "response"
+        });
     }
 
     generateSmartPlaylist(): Observable<Array<Song>> {
         return of([]);
     }
 
-    removeSongFromPlaylist(song: Song, playlist: Playlist) {
+    createPlaylist(playlistName: string): Observable<HttpResponse<Object>> {
+        const url = `${this.PLAYLISTS_URL}`;
+        const email = localStorage.getItem(this.LOCALE_STORAGE_EMAIL);
 
+        const body = {
+            "name": playlistName,
+            "emailCreator": email
+        };
+
+        return this.http.post(url, body, {
+            observe: "response",
+        });
+    }
+
+    getPlaylists(): Observable<HttpResponse<Object>> {
+        const email = localStorage.getItem(this.LOCALE_STORAGE_EMAIL);
+        const url = `${this.PLAYLISTS_URL}?emailCreator=${email}`;
+
+        return this.http.get(url, {
+            observe: "response"
+        });
+    }
+
+    getPlaylistSongs(entityPlaylistId: string): Observable<HttpResponse<Object>> {
+        const id = APIUtils.extractId(entityPlaylistId);
+        const url = `${this.PLAYLISTS_URL}/${id}/songs`;
+
+        return this.http.get(url, {
+            observe: "response"
+        });
+    }
+
+    insertSongToPlaylist(entityPlaylistId: string, songEntityId): Observable<HttpResponse<Object>> {
+        const id = APIUtils.extractId(entityPlaylistId);
+        const songId = APIUtils.extractId(songEntityId);
+        const url = `${this.PLAYLISTS_URL}/${id}/songs`
+
+        const body = {
+            idSong: songId
+        };
+
+        return this.http.post(url, body, {
+            observe: "response"
+        });
+    }
+
+    deletePlaylistSong(entityPlaylistId: string, songEntityId: string): Observable<HttpResponse<Object>> {
+        const id = APIUtils.extractId(entityPlaylistId);
+        const songId = APIUtils.extractId(songEntityId);
+        const url = `${this.PLAYLISTS_URL}/${id}/songs/${songId}`;
+        console.log(url)
+
+        return this.http.delete(url, {
+            observe: "response"
+        });
+
+    }
+
+    deletePlaylist(entityPlaylistId: string): Observable<HttpResponse<Object>> {
+        const id = APIUtils.extractId(entityPlaylistId);
+        const url = `${this.PLAYLISTS_URL}/${id}`;
+        console.log(url);
+
+        return this.http.delete(url, {
+            observe: "response",
+        });
     }
 
 }

@@ -5,6 +5,7 @@ import {Observable} from "rxjs/Observable";
 import {Album} from "../../models/album";
 import {of} from "rxjs/observable/of";
 import {Song} from "../../models/song";
+import {Constants} from "../../utils/constants";
 
 /*
   Generated class for the DiscoverProvider provider.
@@ -18,9 +19,9 @@ export class DiscoverProvider {
     artists: Array<Artist>
     albums: Array<Album>
 
-    ARTISTS_URL = "https://mawk0772fg.execute-api.eu-west-1.amazonaws.com/dev/artists";
-    ALBUMS_URL = "https://mawk0772fg.execute-api.eu-west-1.amazonaws.com/dev/albums";
-    SONGS_URL = "https://mawk0772fg.execute-api.eu-west-1.amazonaws.com/dev/songs";
+    ARTISTS_URL = Constants.API_URL + "/artists";
+    ALBUMS_URL = Constants.API_URL + "/albums";
+    SONGS_URL = Constants.API_URL + "/songs";
 
 
     constructor(public http: HttpClient) {

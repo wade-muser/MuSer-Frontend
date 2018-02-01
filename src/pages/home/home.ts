@@ -4,6 +4,7 @@ import {Song} from "../../models/song";
 import {Artist} from "../../models/artist";
 import {SongPage} from "../song/song";
 import {GenrePage} from "../genre/genre";
+import {Genre} from "../../models/genre";
 
 @Component({
     selector: 'page-home',
@@ -21,11 +22,11 @@ export class HomePage {
 
 
         this.genres = [];
-        this.genres.push({name: "Pop"});
-        this.genres.push({name: "R'N'B"});
-        this.genres.push({name: "Party"});
-        this.genres.push({name: "Rock"});
-        this.genres.push({name: "Rap"});
+        this.genres.push(new Genre("http://example.com/muser#Hip_hop_music", "Hip hop"));
+        this.genres.push(new Genre("http://example.com/muser#Heavy_metal_music", "Heavy metal"));
+        this.genres.push(new Genre("http://example.com/muser#Rock_and_roll", "Rock and roll"));
+        this.genres.push(new Genre("http://example.com/muser#Pop_music", "Pop"));
+        this.genres.push(new Genre("http://example.com/muser#Disco", "Disco"));
 
         this.charts = []
         this.charts.push({name: "Popular"})
@@ -52,7 +53,7 @@ export class HomePage {
 
     goToGenrePage(genre) {
         console.log(`Navigate to genre:${genre}`);
-        this.navCtrl.push(GenrePage);
+        this.navCtrl.push(GenrePage, {"data": genre});
     }
 
     goToChartPage(chart) {

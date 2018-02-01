@@ -30,6 +30,9 @@ import {AuthInterceptor} from "../providers/authorization/AuthInterceptor";
 import {DiscoverProvider} from '../providers/discover/discover';
 import {PlaylistProvider} from '../providers/playlist/playlist';
 import {GenrePage} from "../pages/genre/genre";
+import {EventsProvider} from '../providers/events/events';
+import {SongsProvider} from '../providers/songs/songs';
+import {GenreProvider} from '../providers/genre/genre';
 
 @NgModule({
     declarations: [
@@ -83,6 +86,9 @@ import {GenrePage} from "../pages/genre/genre";
         LogoutProvider,
         DiscoverProvider,
         PlaylistProvider,
+        EventsProvider,
+        SongsProvider,
+        GenreProvider,
     ]
 })
 export class AppModule {

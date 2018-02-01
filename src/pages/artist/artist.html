@@ -100,9 +100,41 @@
                                     <p class="popular-album-card-content-name">
                                         {{popularAlbum.name}}
                                     </p>
-
                                 </ion-card-content>
 
+                            </ion-item>
+
+                        </ion-card>
+                    </div>
+                </ion-scroll>
+            </ion-col>
+        </ion-row>
+
+        <ion-row col-12>
+            <ion-col>
+                <h2 class="recommended-songs-label">
+                    Recommended
+                </h2>
+            </ion-col>
+        </ion-row>
+
+        <ion-row col-12 class="related-info-row">
+            <ion-col>
+                <ion-scroll scrollX="true" id="recommended-songs-album-scroll">
+                    <div>
+                        <ion-card class="popular-album-card"
+                                  *ngFor="let recommendedArtist of recommendedArtists">
+                            <ion-item class="popular-album-card-item">
+                                <ion-avatar>
+                                    <img class="popular-album-card-avatar-image" [src]="recommendedArtist.imageUrl"
+                                         (click)="goToSongPage(recommendedArtist)"
+                                         onerror="this.src='../../assets/imgs/album_cover_alternative.jpg'">
+                                </ion-avatar>
+                                <ion-card-content class="popular-album-card-content">
+                                    <p class="popular-album-card-content-name">
+                                        {{recommendedArtist.name}}
+                                    </p>
+                                </ion-card-content>
                             </ion-item>
 
                         </ion-card>

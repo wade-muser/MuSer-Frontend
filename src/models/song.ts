@@ -8,7 +8,7 @@ export class Song {
 
     constructor(public id: string,
                 public name: string,
-                public artists: Array<Artist>,
+                public artists: Array<Object>,
                 public imageUrl: string) {
 
     }
@@ -16,7 +16,7 @@ export class Song {
     getArtist(): string {
         let songArtist = "";
         for (let artist of this.artists) {
-            songArtist += artist.name + " "
+            songArtist += artist['name'] + " "
         }
         return songArtist.trim();
     }

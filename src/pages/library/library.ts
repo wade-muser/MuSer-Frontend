@@ -1,11 +1,11 @@
 import {Component, ViewChild} from '@angular/core';
-import {AlertController, Gesture, LoadingController, NavController, Slides, ToastController} from 'ionic-angular';
-import {SwipeGestures} from "../../utils/gestures";
+import {AlertController, LoadingController, NavController, Slides, ToastController} from 'ionic-angular';
 import {PlaylistProvider} from "../../providers/playlist/playlist";
 import {Playlist} from "../../models/playlist";
 import {Song} from "../../models/song";
 import {SongPage} from "../song/song";
 import {Artist} from "../../models/artist";
+import {DiscoverProvider} from "../../providers/discover/discover";
 
 @Component({
     selector: 'page-library',
@@ -25,18 +25,23 @@ export class LibraryPage {
     searchArtistValue: string;
     autocompleteArtists: Array<Artist>;
     showAutocompleteList: boolean;
-    searchedArtistTags: Array<string>;
+    searchedArtistTags: Array<Artist>;
     generatedPlaylistSongs: Array<Song>;
+
+    // Generate Playlists without tags
+    noTagsGeneratedPlaylistSongs: Array<Song>;
 
 
     constructor(public navCtrl: NavController,
                 public playlistService: PlaylistProvider,
+                public discoverService: DiscoverProvider,
                 public toastController: ToastController,
                 public loadingController: LoadingController,
                 public alertController: AlertController) {
 
         this.initializeSegmentComponent();
         this.retrieveUserPlaylists();
+        this.generateSmartPlaylistWithoutTags();
         // for (let pageIndex = 0; pageIndex < this.pages.length; pageIndex++) {
         //     this.pagesToPagesIndex.set(this.pages[pageIndex], pageIndex);
         // }
@@ -46,13 +51,7 @@ export class LibraryPage {
         this.searchedArtistTags = [];
         this.autocompleteArtists = [];
         this.generatedPlaylistSongs = [];
-        this.autocompleteArtists.push(new Artist("1", "Dua Lipa", ""));
-        this.autocompleteArtists.push(new Artist("2", "Eminem", ""));
-        this.autocompleteArtists.push(new Artist("3", "The Weeknd", ""));
-        this.autocompleteArtists.push(new Artist("4", "Post Malone", ""));
-        this.autocompleteArtists.push(new Artist("5", "Smiley", ""));
         this.showAutocompleteList = false;
-
 
     }
 
@@ -67,15 +66,58 @@ export class LibraryPage {
     }
 
     retrieveUserPlaylists() {
-        this.playlistService
-            .getUserPlaylists()
-            .subscribe(
-                playlists => {
-                    this.userPlaylists = playlists;
-                },
-                error => {
-                    console.log(error);
-                });
+
+        let loading = this.showLoading();
+
+        this.playlistService.getPlaylists()
+            .subscribe(data => {
+                console.log("Playlists");
+                const playlists = data.body['results'];
+                console.log(playlists);
+
+                let size = Object.keys(playlists).length;
+                this.userPlaylists = [];
+                Object.keys(playlists).forEach(key => {
+                    console.log(key);
+                    // Get songs for each playlist
+                    this.playlistService.getPlaylistSongs(key)
+                        .subscribe(response => {
+                            const playlistSongs = response.body['results'];
+
+                            const songs = [];
+                            Object.keys(playlistSongs).forEach(songKey => {
+                                const songId = playlistSongs[songKey].entity[0];
+                                const songName = playlistSongs[songKey].name[0];
+                                const songImageURL = playlistSongs[songKey].imageURL[0];
+                                const performer = playlistSongs[songKey].performer[0];
+                                const performerName = playlistSongs[songKey].performerName[0];
+                                const performerImageURL = playlistSongs[songKey].performerImageURL[0];
+
+                                const artist = new Artist(performer, performerName, performerImageURL);
+                                const song = new Song(songId, songName, [artist], songImageURL);
+
+                                songs.push(song);
+                            })
+
+                            this.userPlaylists.push(
+                                new Playlist(playlists[key].entity[0], playlists[key].name[0], songs));
+
+                            size--;
+                            if (size == 0) {
+                                loading.dismiss();
+                                console.log("Lambda Playlists");
+                                console.log(this.userPlaylists)
+                            }
+                        }, err => {
+                            console.log(err);
+                            size--;
+                            loading.dismiss()
+                            this.showAlertDialog("Ups...", "Some error occurred");
+                        })
+                })
+            }, err => {
+                console.log(err);
+            });
     }
 
     onSegmentChanged(segmentButton) {
@@ -83,7 +125,7 @@ export class LibraryPage {
         this.currentSegmentPage = segmentButton.value;
     }
 
-    //#region code
+    //#region Gesture Event
 
     // swipeEvent(event: Gesture) {
     //     console.log(event.direction);
@@ -111,6 +153,7 @@ export class LibraryPage {
     }
 
     deleteSongFromPlaylist(song: Song, songIndex: number, playlist: Playlist, playlistIndex: number) {
+
         // Remove song/playlist from UI
         playlist.songs.splice(songIndex, 1);
         if (playlist.songs.length === 0) {
@@ -134,57 +177,138 @@ export class LibraryPage {
                 playlist.songs.splice(songIndex, 0, song);
             } else {
                 console.log("Delete song");
-                this.playlistService.removeSongFromPlaylist(song, playlist);
+                this.playlistService
+                    .deletePlaylistSong(playlist.id, song.id)
+                    .subscribe(data => {
+                        console.log("Deleted Song");
+
+                        if (playlist.songs.length === 0) {
+                            this.playlistService
+                                .deletePlaylist(playlist.id)
+                                .subscribe(data => {
+                                    console.log("Deleted playlist");
+                                }, err => {
+                                    console.log(err);
+                                });
+                        }
+
+                    }, err => {
+                        console.log(err);
+                    });
+
+
             }
         });
         toast.present();
     }
 
     searchArtists(event: Event) {
-        const loading = this.loadingController.create({
-            content: '',
-            spinner: 'dots',
-            cssClass: "transparent",
-            duration: 1500,
-        });
-        loading.present();
+        const loading = this.showLoading();
 
-        setTimeout(() => {
-            this.showAutocompleteList = true;
-        }, 1500);
-        console.log(event);
+        this.discoverService
+            .getArtists(this.searchArtistValue)
+            .subscribe(data => {
+                    console.log(data);
+                    const artists = data.body['results'];
+                    Object.keys(artists).forEach(key => {
+                        const artistId = artists[key].entity[0];
+                        const artistName = artists[key].name[0];
+                        const artistImageURL = artists[key].imageURL[0];
+                        this.autocompleteArtists.push(new Artist(artistId, artistName, artistImageURL));
+                    });
+                    loading.dismiss();
+                    this.showAutocompleteList = true;
+
+                }, err => {
+                    console.log(err);
+                    loading.dismiss();
+                    this.showAlertDialog("Ups...", "Some error occurred");
+                }
+            )
     }
 
     selectArtistAutocomplete(artist: Artist) {
         console.log("Add:" + artist.name);
-        if (this.searchedArtistTags.indexOf(artist.name) >= 0) {
+        if (this.searchedArtistTags.indexOf(artist) >= 0) {
             this.showAlertDialog("Generate Playlist", "Artist was already selected");
             console.log("This artist was already selected");
             return;
         }
 
-        this.searchedArtistTags.push(artist.name);
+        this.searchedArtistTags.push(artist);
         this.showAutocompleteList = false;
+        this.autocompleteArtists = [];
+        this.generateSmartPlaylist();
 
-        const loading = this.loadingController.create({
-            content: '',
-            spinner: 'dots',
-            cssClass: "transparent",
-            duration: 1500
-        });
-        loading.present();
+    }
 
+    generateSmartPlaylist() {
+        const loading = this.showLoading();
         this.playlistService
             .generatePlaylist(this.searchedArtistTags)
-            .subscribe((songs: Array<Song>) => {
-                console.log(songs);
-                this.generatedPlaylistSongs = songs;
+            .subscribe(data => {
+                const generatedSongs = data.body['results'];
+                console.log(generatedSongs);
+                this.generatedPlaylistSongs = [];
+                Object.keys(generatedSongs).forEach(songKey => {
+                    console.log(generatedSongs[songKey]);
+                    const songId = generatedSongs[songKey].entity[0];
+                    const songName = generatedSongs[songKey].name[0];
+                    const songImageURL = generatedSongs[songKey].imageURL[0];
+                    const performer = generatedSongs[songKey].performer[0];
+                    const performerName = generatedSongs[songKey].performerName[0];
+                    const performerImageURL = generatedSongs[songKey].performerImageURL[0];
+
+                    const artist = new Artist(performer, performerName, performerImageURL);
+                    const song = new Song(songId, songName, [artist], songImageURL);
+
+                    this.generatedPlaylistSongs.push(song);
+                });
+                loading.dismiss();
+            }, err => {
+                console.log(err);
+                loading.dismiss();
+                this.showAlertDialog("Ups...", "Some error occurred");
             });
 
         this.searchArtistValue = "";
     }
 
-    removeArtistTag(artist: string) {
+    generateSmartPlaylistWithoutTags() {
+        this.noTagsGeneratedPlaylistSongs = [];
+        const loading = this.showLoading();
+        this.playlistService
+            .generatePlaylist([])
+            .subscribe(data => {
+                const generatedSongs = data.body['results'];
+                console.log(generatedSongs);
+                this.generatedPlaylistSongs = [];
+                Object.keys(generatedSongs).forEach(songKey => {
+                    console.log(generatedSongs[songKey]);
+                    const songId = generatedSongs[songKey].entity[0];
+                    const songName = generatedSongs[songKey].name[0];
+                    const songImageURL = generatedSongs[songKey].imageURL[0];
+                    const performer = generatedSongs[songKey].performer[0];
+                    const performerName = generatedSongs[songKey].performerName[0];
+                    const performerImageURL = generatedSongs[songKey].performerImageURL[0];
+
+                    const artist = new Artist(performer, performerName, performerImageURL);
+                    const song = new Song(songId, songName, [artist], songImageURL);
+
+                    this.noTagsGeneratedPlaylistSongs.push(song);
+                });
+                loading.dismiss();
+                console.log("No tags");
+                console.log(this.noTagsGeneratedPlaylistSongs);
+            }, err => {
+                console.log(err);
+                loading.dismiss();
+                this.showAlertDialog("Ups...", "Some error occurred");
+            });
+
+    }
+
+    removeArtistTag(artist: Artist) {
         console.log(this.searchedArtistTags);
         const artistIndex = this.searchedArtistTags.indexOf(artist);
         if (artistIndex >= 0) {
@@ -197,11 +321,7 @@ export class LibraryPage {
         }
 
         //Regenerate the playlist
-        this.playlistService
-            .generatePlaylist(this.searchedArtistTags)
-            .subscribe((songs: Array<Song>) => {
-                this.generatedPlaylistSongs = songs;
-            });
+        this.generateSmartPlaylist();
     }
 
     showAlertDialog(title: string, message: string) {
@@ -212,6 +332,16 @@ export class LibraryPage {
 
         });
         alert.present();
+    }
+
+    showLoading() {
+        let loading = this.loadingController.create({
+            content: '',
+            spinner: 'dots',
+            cssClass: 'transparent',
+        });
+        loading.present();
+        return loading;
     }
 
 

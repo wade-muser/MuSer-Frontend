@@ -22,7 +22,7 @@
             </ion-avatar>
             <ion-card-content id="song-card-content">
                 <p id="song-card-content-artists-name">
-                    {{song.getArtist()}}
+                    {{song.artists[0].name}}
                 </p>
             </ion-card-content>
         </ion-item>
@@ -59,5 +59,72 @@
 
     </ion-list>
 
+    <ion-grid>
+
+        <ion-row col-12 *ngIf="recommendedSongsSameArtist.length>0">
+            <ion-col>
+                <h2 class="recommended-song-label">
+                    Same artist
+                </h2>
+            </ion-col>
+        </ion-row>
+
+        <ion-row col-12 class="recommended-info-row" *ngIf="recommendedSongsSameArtist.length>0">
+            <ion-col>
+                <ion-scroll scrollX="true" id="recommended-songs-same-artist">
+                    <div>
+                        <ion-card class="recommended-song-card"
+                                  *ngFor="let recommendedSong of recommendedSongsSameArtist">
+                            <ion-item class="recommended-song-card-item">
+                                <ion-avatar>
+                                    <img class="recommended-song-card-avatar-image" [src]="recommendedSong.imageUrl"
+                                         (click)="goToSongPage(recommendedSong)"
+                                         onerror="this.src='../../assets/imgs/album_cover_alternative.jpg'">
+                                </ion-avatar>
+                                <ion-card-content class="recommended-song-card-content">
+                                    <p class="recommended-song-card-content-name">
+                                        {{recommendedSong.name}}
+                                    </p>
+                                </ion-card-content>
+                            </ion-item>
+
+                        </ion-card>
+                    </div>
+                </ion-scroll>
+            </ion-col>
+        </ion-row>
+
+        <ion-row col-12 *ngIf="recommendedSongsSameGenre.length>0">
+            <ion-col>
+                <h2 class="recommended-song-label">
+                    Same Genre
+                </h2>
+            </ion-col>
+        </ion-row>
+
+        <ion-row col-12 class="recommended-info-row" *ngIf="recommendedSongsSameGenre.length>0">
+            <ion-col>
+                <ion-scroll scrollX="true" id="recommended-songs-same-genre">
+                    <div>
+                        <ion-card class="recommended-song-card"
+                                  *ngFor="let recommendedSong of recommendedSongsSameGenre">
+                            <ion-item class="recommended-song-card-item">
+                                <ion-avatar>
+                                    <img class="recommended-song-card-avatar-image" [src]="recommendedSong.imageUrl"
+                                         (click)="goToSongPage(recommendedSong)"
+                                         onerror="this.src='../../assets/imgs/album_cover_alternative.jpg'">
+                                </ion-avatar>
+                                <ion-card-content class="recommended-song-card-content">
+                                    <p class="recommended-song-card-content-name">
+                                        {{recommendedSong.name}}
+                                    </p>
+                                </ion-card-content>
+                            </ion-item>
+                        </ion-card>
+                    </div>
+                </ion-scroll>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 
 </ion-content>

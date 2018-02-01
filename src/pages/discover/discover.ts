@@ -101,7 +101,6 @@ export class DiscoverPage {
             content: '',
             spinner: 'dots',
             cssClass: 'transparent',
-            duration: 1500
         });
         loading.present();
 
@@ -110,23 +109,56 @@ export class DiscoverPage {
             .subscribe(
                 data => {
                     this.searchResults = [];
-                    Object.keys(data.body.results).forEach(key => {
-                        this.searchResults.push({
+                    Object.keys(data.body["results"]).forEach(key => {
+                        const searchResult = {
                             "id": key,
-                            "name": data.body.results[key].name[0],
-                            "imageUrl": data.body.results[key].imageURL[0]
-                        });
+                            "name": data.body["results"][key].name[0],
+                            "imageUrl": data.body["results"][key].imageURL[0]
+                        };
+
+                        switch (this.selectedFilter) {
+
+                            case "Artist":
+                                break;
+                            case "Album":
+                                const artistID = data.body["results"][key].performer[0];
+                                const artistName = data.body["results"][key].performerName[0];
+                                const artistImageURL = data.body["results"][key].performerImageURL[0]
+                                searchResult["artist"] = new Artist(artistID, artistName, artistImageURL);
+                                break;
+                            case "Track":
+                                searchResult["artists"] = [];
+                                for (let i = 0; i < data.body["results"][key].performer.length; i++) {
+                                    console.log(data.body["results"][key].performer[i]);
+                                    console.log(data.body["results"][key].performerName[i]);
+                                    console.log(data.body["results"][key].performerImageURL[i]);
+
+                                    searchResult['artists'].push(
+                                        new Artist(
+                                            data.body["results"][key].performer[i],
+                                            data.body["results"][key].performerName[i],
+                                            data.body["results"][key].performerImageURL[i]
+                                        ));
+                                }
+                                break;
+                        }
+                        this.searchResults.push(searchResult);
                     })
+                    console.log(this.searchResults);
+                    loading.dismiss();
                 }, err => {
+                    console.log("Some error occur during the search");
+                    console.log(err);
                     this.showAlertDialog("Ups..", "Some error occurred. Please try again.")
+                    loading.dismiss();
                 }
             );
     }
 
     showAlertDialog(title: string, message: string) {
         let alert = this.alertController.create({
-            title: "Filter select",
-            message: "A filter must be selected to perform the search",
+            title: title,
+            message: message,
             buttons: ['Ok']
 
         });
@@ -137,7 +169,7 @@ export class DiscoverPage {
         console.log(searchResult);
         console.log("Navigate to ArtistPage")
         const pageToNavigate = this.filterToComponentPage.get(this.selectedFilter);
-        if (pageToNavigate) { //To make sure that it navigates to a page
+        if (pageToNavigate) {
             this.navCtrl.push(pageToNavigate, {"data": searchResult});
 
         }

@@ -4,7 +4,9 @@
 import {Song} from "./song";
 
 export class Playlist {
-    constructor(public name: string, public songs: Array<Song>) {
+    constructor(public id: string,
+                public name: string,
+                public songs: Array<Song>) {
 
     }
 }

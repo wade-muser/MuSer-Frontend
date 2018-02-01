@@ -19,6 +19,7 @@ export class LoginPage {
 
     private HTTP_STATUS_CODE_OK = 200;
     private LOCALE_STORAGE_TOKEN_KEY = "token";
+    private LOCALE_STORAGE_EMAIL = "email";
 
     credentials = {
         email: "",
@@ -54,6 +55,7 @@ export class LoginPage {
                     loading.dismiss();
                     if (response.status == this.HTTP_STATUS_CODE_OK) {
                         localStorage.setItem(this.LOCALE_STORAGE_TOKEN_KEY, response.body['token']);
+                        localStorage.setItem(this.LOCALE_STORAGE_EMAIL, this.credentials.email);
                         this.navCtrl.setRoot(TabsPage);
                     }
                 }, (error: HttpErrorResponse) => {

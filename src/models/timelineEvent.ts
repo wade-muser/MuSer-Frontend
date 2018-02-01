@@ -4,7 +4,10 @@
 
 export class TimelineEvent {
 
-    constructor(public date: string, public title: string, public description: string) {
+    constructor(public entity: string,
+                public date: Date,
+                public title: string,
+                public message: string) {
 
     }
 }

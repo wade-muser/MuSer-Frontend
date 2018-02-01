@@ -15,11 +15,10 @@
 <ion-content padding class="bg-style">
 
     <ul class="cbp_tmtimeline" *ngFor="let timelineEvent of timelineEvents; let index=index ">
-
         <li>
             <time class="cbp_tmtime" datetime="2013-04-10 18:30">
                 <span>
-                    {{timelineEvent.date}}
+                    {{timelineEvent.date.toLocaleDateString()}}
                 </span>
 
                 <div class="cbp_tmicon" [ngClass]="{'odd-timeline-event':index%2===1}">
@@ -30,15 +29,14 @@
                     <h2>
                         {{timelineEvent.title}}
                     </h2>
-                    <p>
-                        {{timelineEvent.description }}
+                    <p class="timeline-message">
+                        {{timelineEvent.message }}
                     </p>
                 </div>
 
             </time>
 
         </li>
-
     </ul>
 
     <!--<ul class="cbp_tmtimeline">-->

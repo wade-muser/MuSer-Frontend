@@ -45,7 +45,7 @@
                                 <img class="song-avatar" [src]="song.imageUrl">
                             </ion-avatar>
                             <h2 class="song-name">
-                                {{song.getArtist()}} {{song.name}}
+                                {{song.getArtist()}} - {{song.name}}
                             </h2>
                         </ion-item>
                         <ion-item-options side="right"
@@ -67,7 +67,7 @@
                     <ion-col>
                         <ion-chip class="search-chip" *ngFor="let artistTag of searchedArtistTags">
                             <ion-label>
-                                {{artistTag}}
+                                {{artistTag.name}}
                             </ion-label>
                             <button class="chip-button" ion-button clear color="light"
                                     (click)="removeArtistTag( artistTag)">
@@ -94,16 +94,16 @@
             </div>
 
             <div *ngIf="generatedPlaylistSongs.length>0">
-                <h2 id="generated-playlist-label">
+                <h2 class="generated-playlist-label">
                     Generated Playlist
                 </h2>
-                <ion-list *ngFor="let song of generatedPlaylistSongs" id="generated-playlist">
+                <ion-list *ngFor="let song of generatedPlaylistSongs" class="generated-playlist">
                     <ion-item class="playlist-item" (click)="goToSongPage(song)">
                         <ion-avatar item-start>
                             <img class="song-avatar" [src]="song.imageUrl">
                         </ion-avatar>
                         <h2 class="song-name">
-                            {{song.getArtist()}} {{song.name}}
+                            {{song.getArtist()}} - {{song.name}}
                         </h2>
                     </ion-item>
                 </ion-list>
@@ -112,9 +112,22 @@
 
         </div>
         <div *ngSwitchCase="pages[2]">
-            <h1>
-                Smart Playlists
-            </h1>
+            <h2>
+                <h2 class="generated-playlist-label">
+                    Generated Playlist
+                </h2>
+                <ion-list *ngFor="let song of noTagsGeneratedPlaylistSongs" class="generated-playlist">
+                    <ion-item class="playlist-item" (click)="goToSongPage(song)">
+                        <ion-avatar item-start>
+                            <img class="song-avatar" [src]="song.imageUrl">
+                        </ion-avatar>
+                        <h2 class="song-name">
+                            {{song.getArtist()}} - {{song.name}}
+                        </h2>
+                    </ion-item>
+                </ion-list>
+
+            </h2>
         </div>
     </div>
 

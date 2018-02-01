@@ -1,6 +1,7 @@
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs/Observable";
+import {Constants} from "../../utils/constants";
 
 /*
   Generated class for the RegisterProvider provider.
@@ -11,7 +12,7 @@ import {Observable} from "rxjs/Observable";
 @Injectable()
 export class RegisterProvider {
 
-    private REGISTER_URL = "https://mawk0772fg.execute-api.eu-west-1.amazonaws.com/dev/register";
+    private REGISTER_URL = Constants.API_URL + "/register";
 
     constructor(private http: HttpClient,) {
         console.log('Hello RegisterProvider Provider');

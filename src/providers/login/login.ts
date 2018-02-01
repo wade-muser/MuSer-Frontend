@@ -1,6 +1,7 @@
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs/Observable";
+import {Constants} from "../../utils/constants";
 
 /*
   Generated class for the LoginProvider provider.
@@ -11,7 +12,7 @@ import {Observable} from "rxjs/Observable";
 @Injectable()
 export class LoginProvider {
 
-    private LOGIN_URL = "https://mawk0772fg.execute-api.eu-west-1.amazonaws.com/dev/login";
+    private LOGIN_URL = Constants.API_URL + "/login";
 
     constructor(public http: HttpClient) {
         console.log('Hello LoginProvider Provider');

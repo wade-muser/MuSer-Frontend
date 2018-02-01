@@ -4,7 +4,7 @@ page-library {
         background: color($colors, dark, base)
     }
 
-    #user-playlists, #generated-playlist {
+    #user-playlists, .generated-playlist {
         background: color($colors, dark);
         margin: -1px 0px 0px !important;
     }
@@ -54,7 +54,7 @@ page-library {
         font-size: 1.5rem
     }
 
-    #generated-playlist-label {
+    .generated-playlist-label {
         color: white;
         margin-left: 15px;
         margin-bottom: 15px;

@@ -41,13 +41,13 @@ page-artist {
         text-overflow: ellipsis;
     }
 
-    #related-artists-label, #albums-label {
+    #related-artists-label, #albums-label, .recommended-songs-label {
         text-align: center;
         color: white;
         margin-bottom: 2rem;
     }
 
-    #related-artists-scroll, #albums-scroll {
+    #related-artists-scroll, #albums-scroll, #recommended-songs-album-scroll {
         white-space: nowrap;
         height: 25rem;
 
@@ -56,7 +56,7 @@ page-artist {
         }
     }
 
-    .related-artist-card, .album-card {
+    .related-artist-card, .album-card, .popular-album-card {
         display: inline-block;
         width: 60%;
         border-radius: 0px;

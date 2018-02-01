@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {AlertController, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {TimelineEvent} from "../../models/timelineEvent";
+import {Genre} from "../../models/genre";
+import {GenreProvider} from "../../providers/genre/genre";
 
 /**
  * Generated class for the GenrePage page.
@@ -16,25 +18,86 @@ import {TimelineEvent} from "../../models/timelineEvent";
 })
 export class GenrePage {
 
+    genre: Genre;
     timelineEvents: Array<TimelineEvent>;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams) {
+    NAV_PARAM_GENRE_KEY = "data";
+
+    constructor(public navCtrl: NavController,
+                public navParams: NavParams,
+                private loadingController: LoadingController,
+                private alertController: AlertController,
+                public genreService: GenreProvider) {
+
+        this.genre = this.navParams.get(this.NAV_PARAM_GENRE_KEY);
         this.timelineEvents = [];
-        const event = new TimelineEvent("4/10/13", "Ricebean black-eyed pe", "Winter purslane courgette pumpkin quandong komatsuna fennel green bean cucumber watercress. Pea\n" +
-            "                    sprouts wattle seed rutabaga okra yarrow cress avocado grape radish bush tomato ricebean black-eyed\n" +
-            "                    pea maize eggplant. Cabbage lentil cucumber chickpea sorrel gram garbanzo plantain lotus root bok\n" +
-            "                    choy squash cress potato summer purslane salsify fennel horseradish dulse. Winter purslane garbanzo\n" +
-            "                    artichoke broccoli lentil corn okra silver beet celery quandong. Plantain salad beetroot bunya nuts\n" +
-            "                    black-eyed pea collard greens radish water spinach gourd chicory prairie turnip avocado sierra leone\n" +
-            "                    bologi.");
-        this.timelineEvents.push(event)
-        this.timelineEvents.push(event)
-        this.timelineEvents.push(event)
-        this.timelineEvents.push(event)
+
+        let loading = this.loadingController.create({
+            content: '',
+            spinner: 'dots',
+            cssClass: 'transparent',
+        });
+        loading.present();
+
+        this.genreService.getTimeline(this.genre.id, 1992, 2017)
+            .subscribe(data => {
+                const results = data.body['results'];
+                const aggregatedResults = [];
+                for (let result of results) {
+                    if (result['performer']) {
+                        aggregatedResults.push(
+                            new TimelineEvent(
+                                result['entity'],
+                                new Date(result['inceptionDate']),
+                                result['performerName'],
+                                `Released:${result.name}`)
+                        );
+                    } else {
+                        aggregatedResults.push(
+                            new TimelineEvent(
+                                result['entity'],
+                                new Date(result['inceptionDate']),
+                                result['name'],
+                                `${result.name} debuts`)
+                        );
+                        if (result['retiringDate']) {
+                            aggregatedResults.push(
+                                new TimelineEvent(result['entity'],
+                                    new Date(result['retiringDate']),
+                                    result['name'],
+                                    `${result.name} retires`)
+                            );
+                        }
+                    }
+                }
+
+                aggregatedResults.sort(this.compareDateTimelineEvents);
+                this.timelineEvents = aggregatedResults;
+                console.log(this.timelineEvents);
+                loading.dismiss();
+            }, err => {
+                console.log(err);
+                this.showAlertDialog("Ups..", "Some error occurred. Please try again.")
+                loading.dismiss();
+            })
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad GenrePage');
+    }
+
+    compareDateTimelineEvents(firstEvent: Object, secondEvent: Object): number {
+        return firstEvent['date'] - secondEvent['date'];
+    }
+
+    showAlertDialog(title: string, message: string) {
+        let alert = this.alertController.create({
+            title: title,
+            message: message,
+            buttons: ['Ok']
+
+        });
+        alert.present();
     }
 
 }
